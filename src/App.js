@@ -1,23 +1,23 @@
-import logo from './logo.svg';
 import './App.css';
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import Homepage from './Components/Homepage/Homepage'
+import CreateAccount from './Components/UserSignUp/CreateAccount.jsx'
+import CreateProfile from './Components/ProfileSetup/index'
+import ProfessionalProfile from './Components/ProfileSetup/ProfessionalInformation'
+import VideoRecorder from './Components/ProfileSetup/RecordYourself';
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <BrowserRouter>
+          <Routes>      
+            <Route path="/" element={<Homepage/>} />
+            <Route path="/create-account" element={<CreateAccount/>} />
+            <Route path="/create-profile" element={<CreateProfile/>} />
+            <Route path="/professional-profile" element={<ProfessionalProfile/>} />
+            <Route path="/video-recorder" element={<VideoRecorder/>} />
+          </Routes>
+        </BrowserRouter>
     </div>
   );
 }

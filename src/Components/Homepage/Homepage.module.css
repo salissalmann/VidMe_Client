@@ -1,0 +1,442 @@
+.Homepage {
+    display: flex;
+    background: linear-gradient(300deg, darkviolet, #e62e5f, #00b0ff, #efa45b);
+    background-size: 400% 400%; /* Adjust the dimensions according to your needs */
+    animation: gradient-animation 10s ease infinite;
+    height: 85vh;
+    position: relative;
+    justify-content: center;
+    margin-bottom: -50rem;
+
+}
+
+.Homepage:before {
+    content: "";
+    height: 100%;
+    flex-grow: 1;
+    background-color:#2B2B2B ;
+    transform: skewY(-16deg);
+    margin-top: 25rem;
+}
+
+@keyframes gradient-animation {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.VidMe-Navbar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    height: 4rem;
+    position: absolute;
+    width: 100%;
+    z-index: 1;
+    transition-duration: 1s;
+    color: white;
+    font: 'Nunito';
+    align-items: center;
+    padding: 2.5rem;
+
+}
+.Navbar-Button-Holder
+{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 20rem;
+}
+.Navbar-Btn
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:fit-content;
+    height: 2rem;
+    border: none;
+    border-radius: 0.3rem;
+    background: rgba(255, 255, 255, 0.3);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: white;
+    font-family: 'Nunito';
+    cursor: pointer;
+    transition-duration: 1s;
+}
+.Navbar-Btn:hover
+{
+    background: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(30px);
+    -webkit-backdrop-filter: blur(30px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: white;
+    cursor: pointer;
+    font-family: 'Nunito';
+}
+.Logo-Placeholder
+{
+    font-family: 'Nunito';
+
+}
+.Logo-Placeholder span
+{
+    font-size: 0.7rem;
+    font-family: 'Nunito';
+
+}
+.Navbar-Button-Holder div
+{
+    margin-top: 0.6rem;
+    font-family: 'Nunito';
+    transition-duration: 1s;
+
+}
+.Navbar-Button-Holder div:hover
+{
+    color: #ffffff75;
+    cursor: pointer;
+    font-family: 'Nunito';
+
+}
+@media (max-width: 850px) {
+    .Logo-Placeholder span
+    {
+        font-size: 0.5rem;
+    }
+    .VidMe-Navbar {
+        padding: 1rem;
+        height: 3rem;
+        margin-top: 1rem;
+    }
+}
+@media (max-width: 600px) {
+    .VidMe-Navbar {
+        padding: 1.5rem;
+        height: 3rem;
+        margin-top: 2rem;
+        margin-bottom: 2rem;
+        flex-direction: column;
+    }
+
+}
+
+body {
+    background-color: whitesmoke
+}
+
+.Form-Title {
+    font-size: 1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    text-align: left;
+}
+
+.Login-Page-Sidebar2 {
+    height: 100%;
+
+}
+
+.Login-Page-Sidebar2 img {
+    width: 110%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#Input-Field {
+    width: 100%;
+    height: 2rem;
+    border: none;
+    border-bottom: 1px solid black;
+    font-family: 'Nunito';
+    font-size: 1rem;
+    outline: none;
+    background-color: transparent;
+    transition-duration: 1s;
+    margin-top: 1rem;
+}
+#Input-Field::placeholder
+{
+    color:black;
+    font-family: 'Nunito';
+    font-size: 1rem;
+    font-weight: 400;
+}
+
+#Input-Field:-webkit-autofill,
+#Input-Field:-webkit-autofill:hover,
+#Input-Field:-webkit-autofill:focus,
+#Input-Field:-webkit-autofill:active {
+  -webkit-text-fill-color: black !important;
+  transition-duration: 1s;
+  background-color: transparent !important;
+  background-clip: text !important;
+  font-size: 1rem;
+}
+.Login-Page-Checkbox {
+    margin-top: -3rem;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    font-family: 'Nunito';
+    font-size: 0.8rem;
+    text-decoration: underline;
+}
+
+.Login-Button {
+    width: 100%;
+    height: 2rem;
+    border: none;
+    border-radius: 0.3rem;
+    margin-top: 2rem;
+    color: white;
+    font-family: 'Nunito';
+    cursor: pointer;
+    transition-duration: 1s;
+    margin-top: 3rem;
+    background-color: #64CD9E;
+    border: 1px solid #64CD9E;
+    color:white;
+    font-weight: bold;
+    font-size: 0.9rem
+}
+
+.Login-Button:hover {
+    cursor: pointer;
+    background-color: transparent;
+    color: #64CD9E;
+    transition-duration: 1s;
+}
+
+.Login-Page-Div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    font-family: 'Nunito';
+    font-size: 0.8rem;
+}
+
+.Logo {
+    display: flex;
+    justify-content: flex-start;
+    align-items: start;
+}
+
+.Logo img {
+    width: 30%;
+    height: 100%;
+    object-fit: cover;
+    margin-left: -0.6rem;
+}
+
+
+
+#DivContainer
+{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 8rem;
+    font-family: 'Nunito';
+    position:absolute
+
+}
+.Container1
+{
+    background-image: url('/public/StaticImages/LoginSideBar.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100%;
+    width: 100%;
+    border-top-left-radius: 0.5rem;
+    border-bottom-left-radius: 0.5rem;
+}
+.Container2
+{
+    width: 100%;
+    height: 100%;
+    border: 1px solid black;
+    background: rgba( 255, 255, 255, 0.5 );
+    backdrop-filter: blur( 18px );
+    -webkit-backdrop-filter: blur( 18px );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );    font-family: 'Nunito';
+    color: rgb(53, 53, 53);
+    padding: 4rem;
+    text-align: left;
+    justify-content:space-around;
+
+}
+.Pointers
+{
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+}
+.Pointers h6
+{
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+}
+.Icon
+{
+    width: 1.2rem;
+    height: 1.2rem;
+    object-fit: cover;
+}
+.PointersDetails
+{
+    display: flex;
+    align-items: center;
+    margin-top: -1rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-left: 2rem;
+    margin-bottom: -0.5rem;
+    text-align: justify;
+}
+.Inputs
+{
+    width: 100%;
+    margin-top: 1rem;
+}
+
+#Input-Field1 {
+    width: 48%;
+    height: 2rem;
+    border: none;
+    border-bottom: 1px solid black;
+    font-family: 'Nunito';
+    font-size: 1rem;
+    outline: none;
+    background-color: transparent;
+    transition-duration: 1s;
+    margin-right: 2%;
+}
+#Input-Field1::placeholder
+{
+    color:black;
+    font-family: 'Nunito';
+    font-size: 1rem;
+    font-weight: 400;
+}
+.SignupForm
+{
+    margin-top: 1rem;
+    display: flex;
+    padding: 1rem;
+    margin-top: 1rem;
+    font-family: 'Nunito';
+    font-size: 0.8rem;
+    flex-direction: column;
+    margin-bottom: 2rem;
+    text-align: left;
+
+}
+.Login-Link
+{
+    margin-top: 1.5rem;
+    display: flex;
+    padding: 1rem;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+    font-family: 'Nunito';
+    font-size: 0.9rem;
+    flex-direction: column;
+    color: white;
+}
+
+.Login-Link
+
+@media (max-width: 1200px) {
+    .Logo {
+        margin-bottom: 1rem;
+    }
+
+    .Login-Page-Checkbox {
+        justify-content: center;
+        margin-top: 0;
+    }
+
+}
+
+@media (max-width: 850px) {
+    #Login-Page-Container {
+        display: grid;
+        grid-template-columns: 100%
+    }
+    #DivContainer
+    {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 100%;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin-top: 5rem;
+        font-family: 'Nunito';
+        position:absolute;
+        margin-top: 5rem;
+        grid-auto-flow: column-reverse;
+    }
+    .Container1
+    {
+        margin-top: 3rem;        
+    }
+
+
+    .Login-Page-Checkbox {
+        justify-content: center;
+        margin-top: 0;
+    }
+
+    .Logo {
+        margin-bottom: 1rem;
+    }
+    .Login-Page-Sidebar2 {
+        display: none;
+    }
+    .Login-Page-Sidebar1 {
+        margin-top: 3rem;
+        border-radius: 0.5rem;
+    }
+
+}
+@media (max-width: 600px) {
+    .Login-Page-Sidebar1 {
+        margin-top: 5rem;
+        border-radius: 0.5rem;
+    }
+
+}
+.SignupForm h6
+{
+    margin-top: 1rem;
+}
+.ForgotPW p
+{
+    margin-top: 1rem;
+    display: flex;
+    font-family: 'Nunito';
+    font-size: 0.9rem;
+    color: white;
+    margin-bottom: -1rem;
+    text-align: right !important;
+}
