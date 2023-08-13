@@ -5,6 +5,8 @@ import CreateAccount from './Components/UserSignUp/CreateAccount.jsx'
 import CreateProfile from './Components/ProfileSetup/index'
 import ProfessionalProfile from './Components/ProfileSetup/ProfessionalInformation'
 import VideoRecorder from './Components/ProfileSetup/RecordYourself';
+import SeekerDashboard from './Components/SeekerDashboard/Main.jsx'
+
 
 function App() {
   return (
@@ -16,6 +18,7 @@ function App() {
             <Route path="/create-profile" element={<CreateProfile/>} />
             <Route path="/professional-profile" element={<ProfessionalProfile/>} />
             <Route path="/video-recorder" element={<VideoRecorder/>} />
+            <Route path="/dashboard" element={<SeekerDashboard/>} />
           </Routes>
         </BrowserRouter>
     </div>
