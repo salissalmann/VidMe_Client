@@ -1,46 +1,127 @@
-.DashboardNav
+.DashWrapper
+{
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+.DashboardDivsContainer
+{
+    display: grid;
+    grid-template-columns: 20% 55% 25%;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-between;
+    align-content: center;
+    width: 90%;
+    height: 100%;
+}
+.ProfileBox
+{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    gap: 1.5rem;
+    width: 100%;
+    background:#F8FAFC ;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    padding: 1rem;
+    text-align: left;
+}
+.ProfileBox img{
+    width: 3rem;
+    height: 3rem;
+    border-radius: 25%;
+}
+.ProfileBoxName h3{
+    font-size: 1.5rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+}
+.ProfileBoxName p{
+    font-size: 1rem;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+
+.NavigationSideBar
+{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    background:#F8FAFC ;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    text-align: left;
+    padding: 1rem;
+    margin-top: 1rem;
+}
+.NavigationSideBarDiv
+{
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    border-bottom: 1px solid #e6e6e6;
+}
+.NavigationSideBarDiv h3
+{
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito';
+    font-weight: 700;
+    color : #343434;
+}
+.NavIcon
+{
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #343434;
+}
+
+
+/*---------------------------------------------------------------------*/
+.AddPost
 {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    background-color: #f5f5f5;
+    align-content: center;
+    background:#F8FAFC ;
+    border-radius: 1rem;
+    box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.1);
+    text-align: left;
     padding: 1rem;
-    padding-left: 6rem;
-    padding-right: 6rem;
-    box-sizing: border-box;
-    border-radius: 0.5rem;
-    box-shadow: 0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
+    gap:0.5rem;
 }
-.DashboardNavLeft
+.AddPostDiv
 {
     display: flex;
+    justify-content: flex-start;
+    align-content: center;
     align-items: center;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+    width: 100%;
 }
-.DashboardNavLeft img
+.AddPostDiv img
 {
     width: 3rem;
     height: 3rem;
-    border-radius: 50%;
-    margin-right: 1rem;
+    border-radius: 25%;
 }
-.DashboardNavLeft h3
-{
-    font-size: 1.5em;
-    font-weight: 500;
-    color: #333;
-    margin-top: 0.5rem;
-    font-family: 'Nunito';
-    font-weight: 600;
-}
-.NavRight
-{
-    display: flex !important;
-    align-items: center;
-    justify-content:flex-end;
-    gap: 0.5rem
-}
-.SearchBox
+.AddPostDiv input
 {
     display: flex;
     align-items: center;
@@ -51,13 +132,53 @@
     padding-left: 1rem;
     padding-right: 4rem;
     border: none;
+    width: 100%;
 }
-.SearchBox:focus{
-    outline: none;
-    border: 1px solid #eceef4;
-}
-.NavRight img{
-    width: 3rem;
+.PostButton
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #469293;
+    border-radius: 0.5rem;
+    border: none;
+    color: white;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    width: 15%;
     height: 3rem;
-    border-radius: 25%;
+    font-family: 'Nunito';
 }
+.PostButton:hover{
+    background-color: #3a7a7a;
+    box-shadow: inset -8px 0px 10px rgba(0, 0, 0, .1);
+
+    
+}
+
+.AddPostDiv input::placeholder
+{
+    font-size: 1rem;
+    font-weight: 500;
+    color: #343434;
+    font-family: 'Nunito';
+}
+.AddPostDiv input:focus
+{
+    outline: none;
+}
+.AddPostDiv input:hover
+{
+    outline: none;
+}
+.AddPostDiv input:active
+{
+    outline: none;
+}
+.AddPostDiv input:focus-visible
+{
+    outline: none;
+}
+
+
