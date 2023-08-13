@@ -13,20 +13,14 @@ export default function Main() {
                     <h3>VidMe</h3>
             </div>
             <div className={styles.NavRight}>
-                <div className={styles.Search}/>
-                    <input className={styles.SearchBox}
-                        type="text"
-                        placeholder="Search"
-                    />
-                </div>
-                <div className={styles.DashboardNavRightProfile}>
-                    <div className={styles.DashboardNavRightProfileImage}>
-                        <img src="/StaticImages/ProfileImage.png" alt="profile" />
-                    </div>
-               </div>
+                <input className={styles.SearchBox}
+                    type="text"
+                    placeholder="Search"
+                />
+                <img src="/StaticImages/MockProfile.jpeg" alt="profile" className='NavProfileImage' />
+            </div>
         </div>
-    
-    
+
     
     
     </>
