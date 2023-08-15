@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import styles from './styles.module.css';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
+import ErrorIcon from '@mui/icons-material/Error';
 import {notification } from 'antd'
+import {CreateAccount} from './API.js'
 import { useNavigate } from 'react-router-dom';
 
 export default function Homepage() {
@@ -14,6 +16,8 @@ export default function Homepage() {
     const [passwordError, setPasswordError] = useState(false);
     const [loading, setLoading] = useState(false);
 
+    const Navigate = useNavigate()
+
     const handleFirstNameChange = (e) => { setFirstName(e.target.value); };
     const handleLastNameChange = (e) => { setLastName(e.target.value); };
     const handleEmailChange = (e) => { setEmail(e.target.value); };
@@ -21,25 +25,52 @@ export default function Homepage() {
     const handleConfirmPasswordChange = (e) => { setConfirmPassword(e.target.value); };
     const handlePhoneChange = (e) => { setPhone(e.target.value); };
 
-    const Navigate = useNavigate()
-
     const handleCreateAccount = () => {
         if (password !== confirmPassword) {
             setPasswordError(true);
             return;
         }
-        setLoading(true);
-        setTimeout(() => {
-            setLoading(false);
-        }, 2000);
-        notification.open({
-            message: 'Account Created Successfully',
-            description:
-                'You have successfully created an account',
-            icon: <DoneAllIcon style={{ color: '#108ee9' }} />,
-        })
-        Navigate('/')
-    };
+        if (firstName==="" || lastName==="" || email==="" || password==="" || confirmPassword==="" || phone === "")
+        {
+            notification.open({
+                message: 'Error',
+                description:
+                    'Please fill all fields',
+                icon: <ErrorIcon style={{ color: 'red' }} />,       
+            })
+            return;
+        }
+        CreateAccount(firstName, lastName, email, password, phone).then(response => response.json())
+        .then(data => {
+            if (data.Success)
+            {
+                notification.open({
+                    message: 'Account Created',
+                    description: data.Message,
+                    icon: <DoneAllIcon style={{ color: '#108ee9' }} />,
+                });
+                Navigate('/login')
+            }
+            else
+            {
+                notification.open({
+                    message: 'Account Creation Failed',
+                    description: data.Message,
+                    icon: <ErrorIcon style={{ color: 'red' }} />,
+                });
+            }
+        }
+        )
+        .catch((error) => {
+            notification.open({
+                message: 'Account Creation Failed',
+                description: error,
+                icon: <ErrorIcon style={{ color: 'red' }} />,
+            });
+        }
+        );
+    
+    }
 
 
     return (

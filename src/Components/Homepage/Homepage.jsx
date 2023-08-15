@@ -3,6 +3,8 @@ import styles from './Homepage.module.css';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import {notification} from 'antd'
 import { useNavigate } from 'react-router-dom';
+import {Login} from './API'
+import ErrorIcon from '@mui/icons-material/Error';
 
 export default function Homepage() {
   const [email, setEmail] = useState('');
@@ -14,19 +16,36 @@ export default function Homepage() {
   let navigate=useNavigate();
 
 
-  const handleCreateAccount = () => {
+  const handleCreateAccount =() => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-    notification.open({
-      message: 'Login Successful',
-      description:
-        'You have successfully logged in',
-      icon: <DoneAllIcon style={{ color: '#108ee9' }} />,
-    });
-    navigate('/create-profile');
-
+    Login(email, password)
+      .then(async(res) => {
+        const ResponseToJson = await res.json()
+        setLoading(false);
+        if (ResponseToJson.Success) {
+          localStorage.setItem('token', ResponseToJson.AuthToken);
+          navigate('/dashboard', { replace: true });
+          notification.open({
+            message: 'Login Successful',
+            description: 'You have successfully logged in',
+            icon: <DoneAllIcon style={{ color: '#108ee9' }} />,
+          })
+        } else {
+          notification.open({
+            message: 'Login Failed',
+            description: 'Please check your email and password',
+            icon: <ErrorIcon style={{ color: 'red' }} />,
+          })
+        }
+      })
+      .catch((err) => {
+        setLoading(false);
+        notification.open({
+          message: 'Login Failed',
+          description: 'Please check your email and password',
+          icon: <ErrorIcon style={{ color: 'red' }} />,
+        })
+      });
   };
 
 
