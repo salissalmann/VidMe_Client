@@ -9,8 +9,11 @@ import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
 import ImageIcon from '@mui/icons-material/Image';
 import SwitchVideoIcon from '@mui/icons-material/SwitchVideo';
-
+import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
+import ModeCommentIcon from '@mui/icons-material/ModeComment';
+import { parseISO, format, formatDistanceToNow } from 'date-fns'
 import { notification } from 'antd'
+
 export default function Main() {
 
     const [postDescription, setdescription] = useState("")
@@ -79,6 +82,114 @@ export default function Main() {
             })
         }
     }
+
+    function formatTimestamp(timestamp) {
+        const parsedTimestamp = parseISO(timestamp.$date);
+        const now = new Date();
+
+        if (now - parsedTimestamp > 24 * 60 * 60 * 1000) {
+            return format(parsedTimestamp, 'do MMM yy, hh:mma');
+        } else {
+            // Less than 24 hours, format as "time ago"
+            return formatDistanceToNow(parsedTimestamp, { addSuffix: true });
+        }
+    } const MockPost = [
+        {
+            "_id": {
+                "$oid": "64dbf6eb2c685d3ff0177ac6"
+            },
+            "Email": "salisbinsalman0@gmail.com",
+            "UserLink": "/salisbinsalman0-645b8ae4-166d-4999-a689-e59d18546eab",
+            "PostText": "Hi, I am Salis bin Salman and I am a React developer working on the MERN Stack. I love creating web applications using modern technologies.",
+            "Attachments": [
+                "https://premedpk-cdn.sgp1.digitaloceanspaces.com/Notes/58b112b9-23dd-49f9-a41c-8d6bc4ea3f91.png"
+            ],
+            "Likes": [],
+            "Keywords": [
+                "salis bin salman",
+                "a react developer",
+                "the mern stack.",
+                "web applications",
+                "modern technologies.",
+                "modern"
+            ],
+            "Comments": [],
+            "timestamp": {
+                "$date": "2023-08-15T22:06:35.115Z"
+            },
+            "__v": 0
+        },
+        {
+            "_id": {
+                "$oid": "64dbf7292c685d3ff0177ac9"
+            },
+            "Email": "salisbinsalman0@gmail.com",
+            "UserLink": "/salisbinsalman0-645b8ae4-166d-4999-a689-e59d18546eab",
+            "PostText": "Network Interference: In some cases, network interference could lead to incorrect request payloads being received by the server. Try testing the application on different networks or using tools like Postman to ensure that the payloads being sent are correct.\n\nThird-Party Middleware: Review any third-party middleware you've integrated into your application. Some middleware might interfere with the handling of request payloads.",
+            "Attachments": [
+                "https://premedpk-cdn.sgp1.cdn.digitaloceanspaces.com/CustomImages/MDNUMS.png"
+            ],
+            "Likes": [],
+            "Keywords": [
+                "interference:",
+                "cases,",
+                "interference",
+                "incorrect request payloads",
+                "the server.",
+                "testing",
+                "the application",
+                "different networks",
+                "tools",
+                "postman",
+                "the payloads",
+                "third-party middleware:",
+                "any third-party middleware",
+                "you've",
+                "your application.",
+                "some middleware",
+                "the handling of request payloads.",
+                "incorrect",
+                "different",
+                "correct."
+            ],
+            "Comments": [],
+            "timestamp": {
+                "$date": "2023-08-12T22:07:37.801Z"
+            },
+            "__v": 0
+        }
+    ]
+
+    const MockRequests = [
+        {
+            "_id": {
+                "$oid": "64dbfaee2c685d3f00177ad1"
+            },
+            "Email": "demo@premed.pk",
+            "FullName" : "Demo Premed",
+            "Title" : "React Developer",
+            "ProfileImageLink" : "https://premedpk-cdn.sgp1.cdn.digitaloceanspaces.com/CustomImages/1.png"
+        },
+        {
+            "_id": {
+                "$oid": "64dc01cc2c685d3f00177ad2"
+            },
+            "Email": "Abdul Hai",
+            "FullName" : "Abdul Hai",
+            "Title" : "Angular Developer",
+            "ProfileImageLink" : "https://premedpk-cdn.sgp1.cdn.digitaloceanspaces.com/CustomImages/2.png"
+        },
+        {
+            "_id": {
+                "$oid": "64dc9b3e2c685d3f00177ada"
+            },
+            "Email": "hasanmurad0@gmail.com",
+            "FullName" : "Hasan Murad",
+            "Title" : ".Net Developer",
+            "ProfileImageLink" : "https://premedpk-cdn.sgp1.cdn.digitaloceanspaces.com/CustomImages/3.png"
+        },  
+    ]
+
 
     return (
         <>
@@ -167,31 +278,75 @@ export default function Main() {
                                 </button>
                             </div>
                         </div>
-                        
 
-                        <div className={styles.PostDisplay}>
-                            
-                        </div>
-
-
-                        
-
+                        {
+                            MockPost.map((post) => {
+                                return (
+                                    <div className={styles.Post}>
+                                        <div className={styles.PostDiv1}>
+                                            <img src="/StaticImages/MockProfile.jpeg" alt="profile" className='PostProfileImage' />
+                                            <div className={styles.PostDiv1Inner}>
+                                                <h3>Salis Salman</h3>
+                                                <p>{formatTimestamp(post.timestamp)}</p>
+                                            </div>
+                                        </div>
+                                        <div className={styles.PostDiv2}>
+                                            <p>{post.PostText}</p>
+                                        </div>
+                                        <div className={styles.PostImageContainer}>
+                                            {post.Attachments.map((attachment) => {
+                                                return (
+                                                    <img src={attachment} alt="attachment" />
+                                                )
+                                            }
+                                            )}
+                                        </div>
+                                        <div className={styles.LikeCommentContainer}>
+                                            <div className={styles.LikeCommentDiv}>
+                                                <ThumbUpOffAltIcon className={styles.LikeCommentIcon} />
+                                                <p>Like</p>
+                                            </div>
+                                            <div className={styles.LikeCommentDiv}>
+                                                <ModeCommentIcon className={styles.LikeCommentIcon} />
+                                                <p>Comment</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )
+                            })
+                        }
 
 
                     </div>
                     <div className={styles.DashboardContainer3}>
-                        <div className={styles.DashboardDiv4}>
-                            <h1>Dashboard</h1>
+                        <div className={styles.DashboardContainer3Div}>
+                            <h6>Requests</h6>
+                            {
+                                MockRequests.map((request) => {
+                                    return (
+                                        <div className={styles.RequestsContainer}>
+                                            <div className={styles.RequestsContainerDiv}>
+                                                <img src={request.ProfileImageLink} alt="profile" className='NavProfileImage' />
+                                                <div className={styles.PostDiv1Inner}>
+                                                    <h3>{request.FullName}</h3>
+                                                    <p>{request.Title}</p>
+                                                </div>
+                                                <div className={styles.RequestsContainerButtons}>
+                                                    <button className={styles.AcceptButton}>Accept</button>
+                                                    <button className={styles.RejectButton}>Reject</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                 </div>
             </div>
-
-
         </>
     )
 }
-
 
 const GenerateUsername = (firstName, lastName) => {
     let username = firstName + "-" + lastName;

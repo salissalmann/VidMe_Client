@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styles from './Homepage.module.css';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
-import {notification} from 'antd'
 import { useNavigate } from 'react-router-dom';
 import {Login} from './API'
 import ErrorIcon from '@mui/icons-material/Error';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import {notification} from 'antd'
 
 export default function Homepage() {
   const [email, setEmail] = useState('');
@@ -24,7 +24,26 @@ export default function Homepage() {
         setLoading(false);
         if (ResponseToJson.Success) {
           localStorage.setItem('token', ResponseToJson.AuthToken);
-          navigate('/dashboard', { replace: true });
+          if(ResponseToJson.ProfileStatus === "0%" )
+          {
+            navigate('/create-profile', { replace: true });
+          }
+          else if(ResponseToJson.ProfileStatus === "33%" )
+          {
+            navigate('/professional-profile', { replace: true });
+          }
+          else if(ResponseToJson.ProfileStatus === "66%" )
+          {
+            navigate('/personal-profile', { replace: true });
+          }
+          else if(ResponseToJson.ProfileStatus === "99%" )
+          {
+            navigate('/video-recorder',{replace : true})
+          }
+          else if(ResponseToJson.ProfileStatus === "100%" )
+          {
+            navigate('/dashboard', { replace: true });
+          }
           notification.open({
             message: 'Login Successful',
             description: 'You have successfully logged in',

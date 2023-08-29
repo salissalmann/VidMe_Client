@@ -2,8 +2,15 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 import UploadIcon from '@mui/icons-material/Upload';
 import { useNavigate } from 'react-router-dom';
+import { Step1 } from './API' 
+import ErrorIcon from '@mui/icons-material/Error';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import {notification} from 'antd'
 
 export default function Index() {
+
+
+
     const [JobTitle, setJobTitle] = useState('');
     const [Gender, setGender] = useState('');
     const [Nationality, setNationality] = useState('');
@@ -31,12 +38,36 @@ export default function Index() {
         reader.readAsDataURL(file);
     };
 
+
     const ClickButton = () => {
          document.querySelector('input[type="file"]').click(); };
 
     const NextStep = () =>
     {
-        Navigate('/professional-profile')
+        const data = {
+            "WantedJob" : JobTitle,
+            "Gender": Gender,
+            "DOB": DateOfBirth,
+            "Nationality": Nationality ,
+            "City": City,
+            "Country": Country,
+            'ProfessionalSummary': professionalInfo
+        };
+    
+        const Response = Step1(data)
+        if(Response.Success)
+        {
+            Navigate('/professional-profile',{replace : true})
+        }
+        else
+        {
+            notification.open({
+                message: 'Error',
+                description: 'Please fill all the fields',
+                icon: <ErrorIcon style={{ color: 'red' }} />,
+              })
+        }
+            
     }
 
     

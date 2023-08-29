@@ -5,6 +5,10 @@ import dayjs from 'dayjs';
 import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { DeleteOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom';
+import { Step2 } from './API'
+import ErrorIcon from '@mui/icons-material/Error';
+import DoneAllIcon from '@mui/icons-material/DoneAll';
+import { notification } from 'antd'
 
 
 export default function Index() {
@@ -100,6 +104,28 @@ export default function Index() {
         const updatedInterests = interests.filter((_, i) => i !== index);
         setInterests(updatedInterests);
     };
+
+    const Next = () => {
+        const data = {
+            "Skills": skills,
+            "Interests": interests,
+            "EmploymentHistory": employments
+        };
+        const Response = Step2(data)
+        if(Response.Success)
+        {
+            Navigate('/personal-profile',{replace : true})
+        }
+        else
+        {
+            notification.open({
+                message: 'Error',
+                description: 'Please fill all the fields',
+                icon: <ErrorIcon style={{ color: 'red' }} />,
+              })
+        }
+
+    }
 
 
 
@@ -270,6 +296,10 @@ export default function Index() {
                                 </div>
                             ))}
                         </div>
+                        <div className={styles.Button}>
+                            <button onClick={Next}>Next</button>
+                        </div>
+
                         </div>
                     </div>
                 </div>
