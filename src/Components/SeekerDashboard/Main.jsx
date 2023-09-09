@@ -13,40 +13,22 @@ import ThumbUpOffAltIcon from '@mui/icons-material/ThumbUpOffAlt';
 import ModeCommentIcon from '@mui/icons-material/ModeComment';
 import { parseISO, format, formatDistanceToNow } from 'date-fns'
 import { notification } from 'antd'
+import AppBar from '@mui/material/AppBar'
+import Toolbar from '@mui/material/Toolbar'
+import Typography from '@mui/material/Typography'
+
+import { CloseCircleOutlined } from '@ant-design/icons'
+import CircleIcon from '@mui/icons-material/Circle';
+import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
+import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
+import { CaretDownOutlined, GlobalOutlined } from '@ant-design/icons'
+
+
 
 export default function Main() {
 
     const [postDescription, setdescription] = useState("")
-    const [image, setImage] = useState(null);
-    const [video, setVideo] = useState(null);
-    const [file, setFile] = useState(null);
-
-    const handleImageChange = (e) => {
-        setImage(e.target.files[0]);
-    }
-
-    const handleVideoChange = (e) => {
-        if (e.target.files[0].type !== "video/mp4") {
-            notification.error({
-                message: "Error",
-                description: "Please upload a mp4 file"
-            })
-            return;
-        }
-        setVideo(e.target.files[0]);
-    }
-
-    const handleFileChange = (event) => {
-        const file = event.target.files[0];
-        if (file.type !== "application/pdf") {
-            notification.error({
-                message: "Error",
-                description: "Please upload a pdf file"
-            })
-            return;
-        }
-        setFile(file);
-    };
+    const [CreatePostModalOpen, SetCreatePostModalOpen] = useState(false)
 
     const Post = async () => {
         if (postDescription === "") {
@@ -166,28 +148,28 @@ export default function Main() {
                 "$oid": "64dbfaee2c685d3f00177ad1"
             },
             "Email": "demo@premed.pk",
-            "FullName" : "Demo Premed",
-            "Title" : "React Developer",
-            "ProfileImageLink" : "https://premedpk-cdn.sgp1.cdn.digitaloceanspaces.com/CustomImages/1.png"
+            "FullName": "Demo Premed",
+            "Title": "React Developer",
+            "ProfileImageLink": "https://premedpk-cdn.sgp1.cdn.digitaloceanspaces.com/CustomImages/1.png"
         },
         {
             "_id": {
                 "$oid": "64dc01cc2c685d3f00177ad2"
             },
             "Email": "Abdul Hai",
-            "FullName" : "Abdul Hai",
-            "Title" : "Angular Developer",
-            "ProfileImageLink" : "https://premedpk-cdn.sgp1.cdn.digitaloceanspaces.com/CustomImages/2.png"
+            "FullName": "Abdul Hai",
+            "Title": "Angular Developer",
+            "ProfileImageLink": "https://premedpk-cdn.sgp1.cdn.digitaloceanspaces.com/CustomImages/2.png"
         },
         {
             "_id": {
                 "$oid": "64dc9b3e2c685d3f00177ada"
             },
             "Email": "hasanmurad0@gmail.com",
-            "FullName" : "Hasan Murad",
-            "Title" : ".Net Developer",
-            "ProfileImageLink" : "https://premedpk-cdn.sgp1.cdn.digitaloceanspaces.com/CustomImages/3.png"
-        },  
+            "FullName": "Hasan Murad",
+            "Title": ".Net Developer",
+            "ProfileImageLink": "https://premedpk-cdn.sgp1.cdn.digitaloceanspaces.com/CustomImages/3.png"
+        },
     ]
 
 
@@ -234,46 +216,19 @@ export default function Main() {
                             <div className={styles.AddPostDiv}>
                                 <img src="/StaticImages/MockProfile.jpeg" alt="profile" className='NavProfileImage' />
                                 <textarea type="text" placeholder="What's on your mind?"
+                                    onClick={() => {
+                                        SetCreatePostModalOpen(true)
+                                    }}
                                     onChange={(e) => setdescription(e.target.value)} value={postDescription}
                                 />
                             </div>
                             <div className={styles.AddPostDiv2}>
                                 <div className={styles.AddPostDiv2Inner}>
-                                    <div className={styles.AddPostDiv2InnerDiv} onClick={() => [document.getElementById('file1').click()]}>
-                                        <input type="file" id="file1" onChange={handleImageChange} hidden
-
-                                        />
-                                        <ImageIcon className={styles.UploadIcon}
-                                        /> Add Image
-                                    </div>
-                                    <div className={styles.AddPostDiv2InnerDiv} onClick={() => [document.getElementById('file2').click()]}>
-                                        <input type="file" id="file2" onChange={handleVideoChange} hidden
-
-                                        />
-                                        <SwitchVideoIcon className={styles.UploadIcon} /> Add Video
-                                    </div>
-                                    <div className={styles.AddPostDiv2InnerDiv} onClick={() => [document.getElementById('file3').click()]}>
-                                        <input type="file" id="file3" onChange={handleFileChange} hidden />
-                                        <InsertLinkIcon className={styles.UploadIcon} /> Add File
-                                    </div>
-                                    {image &&
-                                        <h6>
-                                            {image.name}
-                                        </h6>
-                                    }
-                                    {video &&
-                                        <h6>
-                                            {video.name}
-                                        </h6>
-                                    }
-                                    {file &&
-                                        <h6>
-                                            {file.name}
-                                        </h6>
-                                    }
                                 </div>
                                 <button className={styles.PostButton}
-                                    onClick={Post}>
+                                    onClick={() => {
+                                        SetCreatePostModalOpen(true)
+                                    }}>
                                     Create Post !
                                 </button>
                             </div>
@@ -344,6 +299,12 @@ export default function Main() {
                     </div>
                 </div>
             </div>
+
+            {CreatePostModalOpen &&
+                <CreatePost closeModal={() => {
+                    SetCreatePostModalOpen(false);
+                }} />
+            }
         </>
     )
 }
@@ -353,4 +314,296 @@ const GenerateUsername = (firstName, lastName) => {
     username = "@" + username
 
     return username.toLowerCase();
+}
+
+
+const CreatePost = ({ closeModal }) => {
+
+    const [visibility, setvisibility] = useState("Public")
+
+    const [images, setImages] = useState([]);
+    const [video, setVideo] = useState(null);
+    const [pdf, setPdf] = useState(null);
+    const [error, seterror] = useState(null);
+
+    const [ViewVisibilityModal, SetVisibilityModal] = useState(false)
+
+    const handleImageUpload = (e) => {
+        if (images.length > 4) {
+            notification.error({
+                message: "Error",
+                description: "You can only upload 5 images"
+            })
+            seterror("You can only upload 5 images")
+        }
+        else if (!images) {
+            setImages(e.target.files[0]);
+        }
+        else {
+            setImages([...images, e.target.files[0]]);
+        }
+    };
+
+    const handleVideoUpload = (e) => {
+        if (!video) {
+            setVideo(e.target.files[0]);
+        }
+    };
+
+    const handlePdfUpload = (e) => {
+        if (!pdf) {
+            setPdf(e.target.files[0]);
+        }
+    };
+
+    const handleDeleteImage = (index) => {
+        const newImages = [...images];
+        newImages.splice(index, 1);
+        setImages(newImages);
+    };
+
+    const handleDeleteVideo = (index) => {
+        setVideo(null);
+    };
+
+    return (
+        <>
+            {!ViewVisibilityModal &&
+                <div className={styles.PopupContainer}>
+                    <div className={styles.Popup}>
+                        <div className={styles.PostNavbar}>
+                            <img src="/StaticImages/MockProfile.jpeg" alt="profile" className='NavProfileImage' />
+                            <div>
+                                <h3>Salis Salman</h3>
+                                <div className={styles.publicbox} style={{
+                                    display: 'flex',
+                                    flexDirection: "row",
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    backgroundColor: '#F5F5F5',
+                                    borderRadius: '5px',
+                                    padding: '5px',
+                                    paddingBottom: "0px",
+                                    width: '100%',
+                                    cursor: 'pointer',
+                                    gap: "0.5rem",
+                                    marginLeft: "-0.3rem"
+                                }}
+                                    onClick={() => {
+                                        SetVisibilityModal(true)
+                                    }}
+                                >
+                                    <GlobalOutlined className={styles.postIcon} />
+                                    <h6>{visibility}</h6>
+                                    <CaretDownOutlined className={styles.postIcon} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.PopupContent}>
+                            <h6>What on your mind?</h6>
+                        </div>
+                        <div className={styles.PopupContent}>
+                            <textarea
+                                className={styles.PopupTextArea}
+                                placeholder="Type your confusion here..."
+                                onChange={(e) => {
+                                }}
+                            />
+                        </div>
+
+                        {images.length > 0 && (
+                            <div className={styles.Gallery}>
+                                {images.map((image, index) => (
+                                    <div key={index} className={styles.ImageContainer}>
+                                        <img src={URL.createObjectURL(image)} alt="post" />
+                                        <CloseCircleOutlined
+                                            className={styles.DeleteIcon}
+                                            onClick={() => handleDeleteImage(index)}
+                                        />
+                                    </div>))}
+                                {images.length >= 1 &&
+                                    <div className={styles.ImageContainer}>
+                                        <img src="/PostAdd.png" alt="postadd" onClick={() => {
+                                            if (images.length > 4) {
+                                                notification.error({
+                                                    message: "Error",
+                                                    description: "You can only upload 5 images"
+                                                })
+                                                seterror("You can only upload 5 images")
+                                                return
+                                            }
+                                            document.getElementById('file4').click()
+                                        }} />
+                                    </div>
+                                }
+                            </div>
+                        )}
+
+                        <div className={styles.Gallery}>
+                            {video && (
+                                <div className={styles.ImageContainer}>
+                                    <video controls><source src={URL.createObjectURL(video)} type="video/mp4" /></video>
+                                    <CloseCircleOutlined
+                                        className={styles.DeleteIcon}
+                                        onClick={() => handleDeleteVideo()}
+                                    />
+                                </div>
+                            )}
+                            {pdf && (
+                                <>
+                                    <div className={styles.PDFViewButton} onClick={() => {
+                                        window.open(URL.createObjectURL(pdf))
+                                    }}>
+                                        View PDF
+                                    </div>
+                                    <div className={styles.PDFViewButton} onClick={() => {
+                                        setPdf(null)
+                                    }}
+                                        style={{
+                                            backgroundColor: 'red'
+                                        }}
+                                    >
+                                        Remove PDF
+                                    </div>
+                                </>
+                            )}
+                        </div>
+
+
+
+
+                        <div className={styles.MediaButtonContainer}>
+                            <div className={styles.MediaButton} id={styles.ImageBtn} onClick={() => { document.getElementById('file4').click() }}>
+                                <input
+                                    type="file"
+                                    accept="image/*"
+                                    id="file4"
+                                    onChange={handleImageUpload}
+                                    style={{ display: 'none' }}
+                                />
+                                <ImageIcon className={styles.MediaIcon} />
+                                <h6>Image</h6>
+                            </div>
+                            <div className={styles.MediaButton} id={styles.VideoBtn} onClick={() => { document.getElementById('file5').click() }}>
+                                <input
+                                    type="file"
+                                    accept="video/*"
+                                    id="file5"
+                                    onChange={handleVideoUpload}
+                                    style={{ display: 'none' }}
+                                />
+                                <SwitchVideoIcon className={styles.MediaIcon} />
+                                <h6>Video</h6>
+                            </div>
+                            <div className={styles.MediaButton} id={styles.DocumentBtn} onClick={() => { document.getElementById('file6').click() }}>
+                                <input
+                                    type="file"
+                                    id="file6"
+                                    accept=".pdf"
+                                    onChange={handlePdfUpload}
+                                    style={{ display: 'none' }}
+                                />
+                                <InsertLinkIcon className={styles.MediaIcon} />
+                                <h6>File</h6>
+                            </div>
+                        </div>
+                        <span>{error}</span>
+                        <div className={styles.PopupButtons}>
+                            <div className={styles.PopupButton}
+                                onClick={() => {
+                                    closeModal()
+                                }}
+                            >
+                                <h6>Cancel</h6>
+                            </div>
+                            <div className={styles.PopupButton2} >
+                                <h6>Post</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>}
+
+            {ViewVisibilityModal &&
+                <div className={styles.PopupContainer}>
+                    <div className={styles.Popup}>
+                        <div className={styles.PostNavbar}>
+                            <img src="/StaticImages/MockProfile.jpeg" alt="profile" className='NavProfileImage' />
+                            <div>
+                                <h3>Salis Salman</h3>
+                                <div className={styles.publicbox} style={{
+                                    display: 'flex',
+                                    flexDirection: "row",
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    backgroundColor: '#F5F5F5',
+                                    borderRadius: '5px',
+                                    padding: '5px',
+                                    paddingBottom: "0px",
+                                    width: '100%',
+                                    cursor: 'pointer',
+                                    gap: "0.5rem",
+                                    marginLeft: "-0.3rem"
+                                }}>
+                                    <GlobalOutlined className={styles.postIcon} />
+                                    <h6>{visibility}</h6>
+                                    <CaretDownOutlined className={styles.postIcon} />
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.PopupContent}>
+                            <h6>Who can see this?</h6>
+                        </div>
+                        <div className={styles.PopupContent}>
+                            <div className={styles.VisibilityContainer}>
+                                <div className={styles.VisibilityContainerDiv} onClick={() => {setvisibility("Public")}}>
+                                    <div style={{display:'flex'  , gap:"0.2rem"}}>
+                                        <GlobalOutlined className={styles.holderIcon} />
+                                        <h6>Public</h6>
+                                    </div>
+                                    {visibility==="Public" ? <CircleIcon className={styles.holderIconO} /> : <CircleOutlinedIcon className={styles.holderIconC} />}
+                                </div>
+                                <div className={styles.VisibilityContainerDiv} onClick={() => {setvisibility("Connection")}}>
+                                    <div style={{display:'flex' , gap:"0.2rem"}}>
+                                        <PeopleAltIcon  className={styles.holderIcon} style={{
+                                            marginTop: "-0.3rem"
+                                        }}
+                                            />
+                                        <h6>Connections</h6>
+                                    </div>
+                                    {visibility==="Connection" ? <CircleIcon className={styles.holderIconO} /> : <CircleOutlinedIcon className={styles.holderIconC} />}                                        
+                                </div>
+                                <div className={styles.VisibilityContainerDiv} onClick={() => {setvisibility("Only Me")}}>
+                                    <div style={{display:'flex' , gap:"0.2rem"}}>
+                                        <VisibilityOffOutlinedIcon className={styles.holderIcon} style={{
+                                            marginTop: "-0.2rem"
+                                        }} />
+                                        <h6>Only Me</h6>
+                                    </div>
+                                    {visibility==="Only Me" ? <CircleIcon className={styles.holderIconO}
+                                    
+                                     /> : <CircleOutlinedIcon className={styles.holderIconC} />}
+                                </div>
+                            </div>
+                        </div>
+                        <div className={styles.PopupButtons}>
+                            <div className={styles.PopupButton}
+                                onClick={() => {
+                                    SetVisibilityModal(false)
+                                }}
+                            >
+                                <h6>Cancel</h6>
+                            </div>
+                            <div className={styles.PopupButton2} onClick={() => {
+                                SetVisibilityModal(false)
+                            }} >
+                                <h6>Done</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
+        </>
+    )
 }

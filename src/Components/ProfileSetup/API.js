@@ -39,6 +39,28 @@ export async function Step2 (data) {
     return ResponseData
 }
 
+export async function Step3 (data) {
+    const Response = await fetch(
+        `${process.env.REACT_APP_SERVER_URL}/api/seeker/profile/personal`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization-Token' : localStorage.getItem('token'),
+            },
+            body: JSON.stringify({
+                Projects: data.Projects,
+                Education: data.Education,
+                Certifications: data.Certifications,
+                Languages: data.Languages,
+                SocialLinks: data.SocialLinks
+            })
+        }
+    )
+    const ResponseData = await Response.json()
+    return ResponseData
+}
+
 
             
 
