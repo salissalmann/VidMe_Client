@@ -22,48 +22,21 @@ import CircleIcon from '@mui/icons-material/Circle';
 import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import { CaretDownOutlined, GlobalOutlined } from '@ant-design/icons'
+import { ShareAltOutlined } from '@ant-design/icons';
+
+import PostDisplay from '../../GlobalComponents/PostDisplay/PostDisplay';
+
+import { useNavigate } from 'react-router-dom';
 
 
 
 export default function Main() {
+    
 
     const [postDescription, setdescription] = useState("")
     const [CreatePostModalOpen, SetCreatePostModalOpen] = useState(false)
-
-    const Post = async () => {
-        if (postDescription === "") {
-            notification.error({
-                message: "Error",
-                description: "Please enter a description"
-            })
-            return;
-        }
-        const Reponse =
-            await fetch("http://localhost:4002/create-post", {
-                method: "POST",
-                headers: {
-                    "Authorization-Token": localStorage.getItem('token'),
-                    "Content-Type": "application/json"
-                },
-                body:
-                    JSON.stringify({
-                        PostText: postDescription,
-                    }),
-            });
-        const content = await Reponse.json();
-        if (content.Success) {
-            notification.success({
-                message: "Success",
-                description: "Posted Successfully"
-            })
-        }
-        else {
-            notification.error({
-                message: "Error",
-                description: content.Message
-            })
-        }
-    }
+    const [ViewPost ,  SetViewPost ]  = useState(false)
+    const [PostDisplayID , SetPostDisplayID] = useState("") 
 
     function formatTimestamp(timestamp) {
         const parsedTimestamp = parseISO(timestamp.$date);
@@ -75,17 +48,19 @@ export default function Main() {
             // Less than 24 hours, format as "time ago"
             return formatDistanceToNow(parsedTimestamp, { addSuffix: true });
         }
-    } const MockPost = [
+    } 
+
+    
+    
+    const MockPost = [
         {
-            "_id": {
-                "$oid": "64dbf6eb2c685d3ff0177ac6"
-            },
+            "_id": "64dbf6eb2c685d3ff0177ac6",
             "Email": "salisbinsalman0@gmail.com",
             "UserLink": "/salisbinsalman0-645b8ae4-166d-4999-a689-e59d18546eab",
             "PostText": "Hi, I am Salis bin Salman and I am a React developer working on the MERN Stack. I love creating web applications using modern technologies.",
             "Attachments": [
-                "https://premedpk-cdn.sgp1.digitaloceanspaces.com/Notes/58b112b9-23dd-49f9-a41c-8d6bc4ea3f91.png"
-            ],
+                "https://premedpk-cdn.sgp1.digitaloceanspaces.com/Notes/58b112b9-23dd-49f9-a41c-8d6bc4ea3f91.png",
+              ],            
             "Likes": [],
             "Keywords": [
                 "salis bin salman",
@@ -102,9 +77,7 @@ export default function Main() {
             "__v": 0
         },
         {
-            "_id": {
-                "$oid": "64dbf7292c685d3ff0177ac9"
-            },
+            "_id":"64dbf7292c685d3ff0177ac9",
             "Email": "salisbinsalman0@gmail.com",
             "UserLink": "/salisbinsalman0-645b8ae4-166d-4999-a689-e59d18546eab",
             "PostText": "Network Interference: In some cases, network interference could lead to incorrect request payloads being received by the server. Try testing the application on different networks or using tools like Postman to ensure that the payloads being sent are correct.\n\nThird-Party Middleware: Review any third-party middleware you've integrated into your application. Some middleware might interfere with the handling of request payloads.",
@@ -261,10 +234,19 @@ export default function Main() {
                                                 <ThumbUpOffAltIcon className={styles.LikeCommentIcon} />
                                                 <p>Like</p>
                                             </div>
-                                            <div className={styles.LikeCommentDiv}>
+                                            <div className={styles.LikeCommentDiv} onClick={
+                                                () => {
+                                                    SetPostDisplayID(post._id)
+                                                    SetViewPost(true)
+                                                }
+                                            }>
                                                 <ModeCommentIcon className={styles.LikeCommentIcon} />
                                                 <p>Comment</p>
                                             </div>
+                                            <div className={styles.LikeCommentDiv}>
+                                                <ShareAltOutlined className={styles.LikeCommentIcon}/>
+                                                <p>Repost</p>
+                                            </div>                                            
                                         </div>
                                     </div>
                                 )
@@ -304,6 +286,15 @@ export default function Main() {
                 <CreatePost closeModal={() => {
                     SetCreatePostModalOpen(false);
                 }} />
+            }
+
+            {ViewPost &&
+                <PostDisplay 
+                closeModal={() => {
+                    SetViewPost(false);
+                }}
+                PostID={PostDisplayID}
+                />
             }
         </>
     )
