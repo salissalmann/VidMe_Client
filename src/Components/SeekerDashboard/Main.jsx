@@ -29,6 +29,18 @@ import PostDisplay from '../../GlobalComponents/PostDisplay/PostDisplay';
 import { useNavigate } from 'react-router-dom';
 
 
+import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
+import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined';
+import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
+import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
+import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
+import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
+import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
+
+import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
+import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlined';
+import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 
 export default function Main() {
     
@@ -60,6 +72,10 @@ export default function Main() {
             "PostText": "Hi, I am Salis bin Salman and I am a React developer working on the MERN Stack. I love creating web applications using modern technologies.",
             "Attachments": [
                 "https://premedpk-cdn.sgp1.digitaloceanspaces.com/Notes/58b112b9-23dd-49f9-a41c-8d6bc4ea3f91.png",
+                "https://premedpk-cdn.sgp1.digitaloceanspaces.com/Notes/58b112b9-23dd-49f9-a41c-8d6bc4ea3f91.png",
+                "https://premedpk-cdn.sgp1.digitaloceanspaces.com/Notes/58b112b9-23dd-49f9-a41c-8d6bc4ea3f91.png",
+                "https://premedpk-cdn.sgp1.digitaloceanspaces.com/Notes/58b112b9-23dd-49f9-a41c-8d6bc4ea3f91.png",
+
               ],            
             "Likes": [],
             "Keywords": [
@@ -160,27 +176,47 @@ export default function Main() {
                                 <h3>Salis Salman</h3>
                                 <p>{GenerateUsername("Salis", "Salman")}</p>
                             </div>
+                        </div> 
+                        <div className={styles.NavigationSideBar}>
+                            <h6>
+                                Feed
+                            </h6>
+                            <div className={styles.NavigationSideBarDiv}>
+                                <NewspaperOutlinedIcon className={styles.NavIcon} style={{color : "red"}} />
+                                <h3>News Feed</h3>
+                            </div>
+                            <div className={styles.NavigationSideBarDiv}>
+                                <Diversity3OutlinedIcon className={styles.NavIcon} style={{color: "#FFC107"}}/>
+                                <h3>Groups</h3>
+                            </div>
+                            <div className={styles.NavigationSideBarDiv}>
+                                <BookmarkBorderOutlinedIcon className={styles.NavIcon} style={{color: "#4CAF50"}}/>
+                                <h3>Saved Posts</h3>
+                            </div>
+                            <div className={styles.NavigationSideBarDiv}>
+                                <PeopleAltOutlinedIcon className={styles.NavIcon} style={{color: "#2196F3"}}/>
+                                <h3>Friends</h3>
+                            </div>
+                            <div className={styles.NavigationSideBarDiv}>
+                                <PersonAddOutlinedIcon className={styles.NavIcon} style={{color: "#9C27B0"}}/>
+                                <h3>Suggestions</h3>
+                            </div>
                         </div>
                         <div className={styles.NavigationSideBar}>
+                            <h6>
+                                Account
+                            </h6>
                             <div className={styles.NavigationSideBarDiv}>
-                                <WindowIcon className={styles.NavIcon} />
-                                <h3>HOME</h3>
+                                <SettingsIcon className={styles.NavIcon} style={{color: "#FFC107"}}/>
+                                <h3>Settings</h3>
                             </div>
                             <div className={styles.NavigationSideBarDiv}>
-                                <ExploreIcon className={styles.NavIcon} />
-                                <h3>EXPLORE</h3>
+                                <BarChartOutlinedIcon className={styles.NavIcon} style={{color: "#4CAF50"}}/>
+                                <h3>Analytics</h3>
                             </div>
                             <div className={styles.NavigationSideBarDiv}>
-                                <WorkspacesIcon className={styles.NavIcon} />
-                                <h3>SPACES</h3>
-                            </div>
-                            <div className={styles.NavigationSideBarDiv}>
-                                <PeopleAltIcon className={styles.NavIcon} />
-                                <h3>CONNECTIONS</h3>
-                            </div>
-                            <div className={styles.NavigationSideBarDiv}>
-                                <SettingsIcon className={styles.NavIcon} />
-                                <h3>SETTINGS</h3>
+                                <LogoutOutlinedIcon className={styles.NavIcon} style={{color: "#F44336"}}/>
+                                <h3>Logout</h3>
                             </div>
                         </div>
                     </div>
@@ -188,7 +224,7 @@ export default function Main() {
                         <div className={styles.AddPost}>
                             <div className={styles.AddPostDiv}>
                                 <img src="/StaticImages/MockProfile.jpeg" alt="profile" className='NavProfileImage' />
-                                <textarea type="text" placeholder="What's on your mind?"
+                                <textarea type="text" placeholder="Create Post?"
                                     onClick={() => {
                                         SetCreatePostModalOpen(true)
                                     }}
@@ -196,14 +232,23 @@ export default function Main() {
                                 />
                             </div>
                             <div className={styles.AddPostDiv2}>
-                                <div className={styles.AddPostDiv2Inner}>
+                                <div className={styles.PostButton}
+                                    onClick={() => { SetCreatePostModalOpen(true) }}>
+                                    <EditOutlinedIcon/>
+                                    Create Post
                                 </div>
-                                <button className={styles.PostButton}
-                                    onClick={() => {
-                                        SetCreatePostModalOpen(true)
-                                    }}>
-                                    Create Post !
-                                </button>
+                                <div className={styles.PostButton2}>
+                                    <CheckCircleOutlineOutlinedIcon/>
+                                    Create Poll
+                                </div>
+                                <div className={styles.PostButton3}>
+                                    <EventAvailableOutlinedIcon/>
+                                    Create Event
+                                </div>
+                                <div className={styles.PostButton4}> 
+                                    <ArticleOutlinedIcon/>
+                                    Create Article
+                                </div>
                             </div>
                         </div>
 
@@ -547,8 +592,10 @@ const CreatePost = ({ closeModal }) => {
                         <div className={styles.PopupContent}>
                             <div className={styles.VisibilityContainer}>
                                 <div className={styles.VisibilityContainerDiv} onClick={() => {setvisibility("Public")}}>
-                                    <div style={{display:'flex'  , gap:"0.2rem"}}>
-                                        <GlobalOutlined className={styles.holderIcon} />
+                                    <div style={{display:'flex'  , gap:"0.2rem",
+                                }}>
+                                        <GlobalOutlined className={styles.holderIcon} style={{                                     marginTop: "0.1rem"
+}} />
                                         <h6>Public</h6>
                                     </div>
                                     {visibility==="Public" ? <CircleIcon className={styles.holderIconO} /> : <CircleOutlinedIcon className={styles.holderIconC} />}
@@ -563,14 +610,14 @@ const CreatePost = ({ closeModal }) => {
                                     </div>
                                     {visibility==="Connection" ? <CircleIcon className={styles.holderIconO} /> : <CircleOutlinedIcon className={styles.holderIconC} />}                                        
                                 </div>
-                                <div className={styles.VisibilityContainerDiv} onClick={() => {setvisibility("Only Me")}}>
+                                <div className={styles.VisibilityContainerDiv} onClick={() => {setvisibility("Private")}}>
                                     <div style={{display:'flex' , gap:"0.2rem"}}>
                                         <VisibilityOffOutlinedIcon className={styles.holderIcon} style={{
                                             marginTop: "-0.2rem"
                                         }} />
-                                        <h6>Only Me</h6>
+                                        <h6>Private</h6>
                                     </div>
-                                    {visibility==="Only Me" ? <CircleIcon className={styles.holderIconO}
+                                    {visibility==="Private" ? <CircleIcon className={styles.holderIconO}
                                     
                                      /> : <CircleOutlinedIcon className={styles.holderIconC} />}
                                 </div>

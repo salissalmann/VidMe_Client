@@ -18,33 +18,42 @@
 .ProfileBox {
     display: flex;
     justify-content: center;
-    align-content: center;
-    gap: 1.5rem;
+    align-content: flex-start;
+    gap: 1rem;
     width: 100%;
-    background: #F8FAFC;
-    border: 1px solid rgb(192, 191, 191);
-    border-radius: 0.75rem;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    padding: 1rem;
+    box-sizing: border-box;
+    box-shadow: 0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
     text-align: left;
-
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+    border: 1px solid rgb(223, 221, 221);
+    background-color: white;
 }
-
 .ProfileBox img {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 25%;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    margin-left: -2rem;
 }
 
 .ProfileBoxName h3 {
-    font-size: 1.5rem;
+    font-size: 1rem;
     font-weight: 500;
     margin: 0;
     padding: 0;
 }
 
 .ProfileBoxName p {
-    font-size: 1rem;
+    font-size: 0.85rem;
     font-weight: 400;
     margin: 0;
     padding: 0;
@@ -58,13 +67,20 @@
     flex-direction: column;
     justify-content: space-between;
     align-content: center;
-    background: #F8FAFC;
-    border: 1px solid rgb(192, 191, 191);
-    border-radius: 0.75rem;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
     text-align: left;
-    padding: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+    border: 1px solid rgb(223, 221, 221);
     margin-top: 1rem;
+    padding: 1rem;
+    background-color: white;
+    padding-bottom: 0;
 }
 
 .NavigationSideBarDiv {
@@ -95,6 +111,15 @@
     color: #343434;
 }
 
+.NavigationSideBar h6{
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito';
+    color: #676666;
+    margin-bottom: 1rem;
+}
 
 /*---------------------------------------------------------------------*/
 .AddPost {
@@ -102,12 +127,18 @@
     justify-content: space-between;
     flex-direction: column;
     align-content: center;
-    background: #F8FAFC;
-    border: 1px solid rgb(192, 191, 191);
-    border-radius: 0.75rem;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
     text-align: left;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+    border: 1px solid rgb(223, 221, 221);
     padding: 1rem;
+    background-color: white;
     gap: 0.5rem;
 }
 
@@ -131,7 +162,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    background-color: #eceef4;
+    background-color: #edecec;
     border-radius: 0.5rem;
     padding: 0.75rem;
     padding-left: 1rem;
@@ -145,26 +176,98 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #469293;
+    border:1px solid #D05555;
     border-radius: 0.3rem;
-    border: none;
-    color: white;
+    color: #D05555;
     font-size: 0.9rem;
     font-weight: 500;
     cursor: pointer;
     font-family: 'Nunito';
     padding: 0.5rem;
-    width: 20%;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    width: 22%;
+    gap:0.4rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+    transition-duration: 0.5s;
 }
 
 .PostButton:hover {
-    background-color: #3a7a7a;
-    box-shadow: inset -8px 0px 10px rgba(0, 0, 0, .1);
-
-
+    background-color:#D05555;
+    color: white;
 }
+
+.PostButton2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid #3681f9;
+    border-radius: 0.3rem;
+    color: #3681f9;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Nunito';
+    padding: 0.5rem;
+    width: 22%;
+    gap:0.4rem;
+    transition-duration: 0.5s;
+}
+
+.PostButton2:hover {
+    background-color:#3681f9;
+    color: white;
+}
+
+.PostButton3 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid #f9b32f;
+    border-radius: 0.3rem;
+    color: #f9b32f;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Nunito';
+    padding: 0.5rem;
+    width: 22%;
+    gap:0.4rem;
+    transition-duration: 0.5s;
+}
+
+.PostButton3:hover {
+    background-color:#f9b32f;
+    color: white;
+}
+
+.PostButton4 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border:1px solid #4CAF50;
+    border-radius: 0.3rem;
+    color: #4CAF50;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Nunito';
+    padding: 0.5rem;
+    width: 22%;
+    gap:0.4rem;
+    transition-duration: 0.5s;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+}
+
+.PostButton4:hover {
+    background-color:#4CAF50;
+    color: white;
+}
+
 
 .AddPostDiv input::placeholder {
     font-size: 1rem;
@@ -194,7 +297,7 @@
     justify-content: space-between;
     align-content: center;
     align-items: center;
-    gap: 1rem;
+    gap: 0.5rem;
     padding-bottom: 0.5rem;
     width: 100%;
 }
@@ -223,12 +326,19 @@
     justify-content: space-between;
     flex-direction: column;
     align-content: center;
-    background: #F8FAFC;
-    border: 1px solid rgb(192, 191, 191);
-    border-radius: 0.75rem;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
     text-align: left;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+    border: 1px solid rgb(223, 221, 221);
     padding: 1rem;
+    background-color: white;
+    text-align: left;
     gap: 0.5rem;
 }
 
@@ -243,10 +353,15 @@
 }
 
 .PostDiv1 img {
-    width: 3rem;
-    height: 3rem;
-    border-radius: 25%;
+    width: 2.6rem;
+    height: 2.6rem;
+    border-radius: 100%;
     object-fit: cover;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    border: 1px solid #ccc;
 }
 
 .PostDiv1Inner {
@@ -277,19 +392,23 @@
 
 .PostImageContainer {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     align-content: center;
     align-items: center;
     width: 100%;
     height: 100%;
-    border-radius: 0.5rem;
     overflow: hidden;
+    gap:1rem;
+    
 }
 
 .PostImageContainer img {
-    width: 100%;
-    height: 100%;
+
+    width: 10rem;
+    height: 14rem;
     object-fit: cover;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
 }
 
 .LikeCommentContainer {
@@ -306,27 +425,34 @@
     justify-content: center;
     align-content: center;
     align-items: center;
-    border: 1px solid #807e7e;
     border-radius: 0.3rem;
     padding: 0.4rem;
+    margin-top: 1rem;
     gap: 0.5rem;
     width: 100%;
     -webkit-border-radius: 0.3rem;
     -moz-border-radius: 0.3rem;
     -ms-border-radius: 0.3rem;
     -o-border-radius: 0.3rem;
+    background-color: white;
+    box-sizing: border-box;
+    box-shadow: 0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
+    transition-duration: 0.5s;
 }
+.LikeCommentDiv:hover{
+    box-shadow: 0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.2);
+    color:#1f66ff
+}
+
 .LikeCommentDiv p{
     font-size: 0.8rem;
     font-weight: 400;
     margin: 0;
     padding: 0;
     font-family: 'Nunito';
-    color: #807e7e;
 }
 .LikeCommentIcon {
     font-size: 1.5rem;
-    color: #807e7e;
 }
 
 /*========================================================*/
@@ -335,17 +461,21 @@
     justify-content: space-between;
     flex-direction: column;
     align-content: center;
-    background: #F8FAFC;
-    border: 1px solid rgb(192, 191, 191);
-    border-radius: 0.75rem;
-    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.1);
-    text-align: left;
+    border: 1px solid rgb(223, 221, 221);
     padding: 1rem;
+    background-color: white;
+    text-align: left;
     gap: 0.5rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+    box-shadow: 0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
 }
 
 .DashboardContainer3Div h6 {
-    font-size: 1rem;
+    font-size: 1rem; 
     font-weight: 500;
     margin: 0;
     padding: 0;
@@ -394,11 +524,11 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: rgb(127, 199, 19);
-    border-radius: 0.3rem;
-    border: none;
+    background-color:#1f66ff;
+    border-radius: 2rem;
+    border: 1px solid #1f66ff;
     color: white;
-    font-size: 0.9rem;
+    font-size: 0.8rem;
     font-weight: 500;
     cursor: pointer;
     font-family: 'Nunito';
@@ -406,22 +536,29 @@
     padding-left: 0.75rem;
     padding-right: 0.75rem;
     transition-duration: 1s;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+    transition-duration: 0.5s;
 }
 
 .AcceptButton:hover {
-    background-color: #00ff00;
+    border: 1px solid #1f66ff;
     box-shadow: inset -8px 0px 10px rgba(0, 0, 0, .1);
+    color:#1f66ff;
+    background-color: transparent;
 }
 
 .RejectButton {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #e74c3c;
-    border-radius: 0.3rem;
-    border: none;
-    color: white;
-    font-size: 0.9rem;
+    background-color: rgb(204, 204, 204);
+    border-radius: 2rem;
+    border: 1px solid  rgb(204, 204, 204);
+    color: rgb(102, 102, 102);
+    font-size: 0.8rem;
     font-weight: 500;
     cursor: pointer;
     font-family: 'Nunito';
@@ -432,8 +569,10 @@
 }
 
 .RejectButton:hover {
-    background-color: #e58b81;
+    border: 1px solid rgb(204, 204, 204);
     box-shadow: inset -8px 0px 10px rgba(0, 0, 0, .1);
+    color:rgb(204, 204, 204);
+    background-color: transparent;
 }
 
 

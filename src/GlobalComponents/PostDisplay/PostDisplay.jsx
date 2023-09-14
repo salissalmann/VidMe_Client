@@ -22,7 +22,7 @@ export default function PostDisplay(props) {
     const [CommentToBeAdded, SetCommentToBeAdded] = useState("")
     const [PostComments, SetPostComments] = useState([])
     const [CommentAddedSuccessfully, SetCommentAddedSuccessfully] = useState(0)
-
+ 
     const [ViewCommentReplies, SetViewCommentReplies] = useState(false)
 
     const [Reply, SetReply] = useState("")
