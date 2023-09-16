@@ -2,14 +2,12 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 import UploadIcon from '@mui/icons-material/Upload';
 import { useNavigate } from 'react-router-dom';
-import { Step1 } from './API' 
+import { Step1 } from './API'
 import ErrorIcon from '@mui/icons-material/Error';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
-import {notification} from 'antd'
+import { notification } from 'antd'
 
 export default function Index() {
-
-
 
     const [JobTitle, setJobTitle] = useState('');
     const [Gender, setGender] = useState('');
@@ -40,37 +38,35 @@ export default function Index() {
 
 
     const ClickButton = () => {
-         document.querySelector('input[type="file"]').click(); };
+        document.querySelector('input[type="file"]').click();
+    };
 
-    const NextStep = () =>
-    {
+    const NextStep = () => {
         const data = {
-            "WantedJob" : JobTitle,
+            "WantedJob": JobTitle,
             "Gender": Gender,
             "DOB": DateOfBirth,
-            "Nationality": Nationality ,
+            "Nationality": Nationality,
             "City": City,
             "Country": Country,
             'ProfessionalSummary': professionalInfo
         };
-    
+
         const Response = Step1(data)
-        if(Response.Success)
-        {
-            Navigate('/professional-profile',{replace : true})
+        if (Response.Success) {
+            Navigate('/professional-profile', { replace: true })
         }
-        else
-        {
+        else {
             notification.open({
                 message: 'Error',
                 description: 'Please fill all the fields',
                 icon: <ErrorIcon style={{ color: 'red' }} />,
-              })
+            })
         }
-            
+
     }
 
-    
+
     return (
         <>
 
@@ -184,8 +180,8 @@ export default function Index() {
                             </div>
 
                             <div className={styles.Button}>
-                        <button onClick={NextStep}>Next</button>
-                    </div>
+                                <button onClick={NextStep}>Next</button>
+                            </div>
 
                         </div>
 
