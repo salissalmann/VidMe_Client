@@ -24,6 +24,20 @@ export default function Homepage() {
         setLoading(false);
         if (ResponseToJson.Success) {
           localStorage.setItem('token', ResponseToJson.AuthToken);
+          ResponseToJson.ProfileStatus = "100%";
+
+          const formData = {
+            Email: email,
+          }
+          const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/FindUserInfo`, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(formData),
+          });
+          const jsonData = await response.json();
+
           if (ResponseToJson.ProfileStatus === "0%") {
             navigate('/create-profile', { replace: true });
           }
@@ -37,7 +51,7 @@ export default function Homepage() {
             navigate('/video-recorder', { replace: true })
           }
           else if (ResponseToJson.ProfileStatus === "100%") {
-            navigate('/dashboard', { replace: true });
+            navigate("/dashboard", { state: { replace: true, user: jsonData[0]._id } });
           }
           notification.open({
             message: 'Login Successful',

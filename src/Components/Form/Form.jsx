@@ -6,7 +6,7 @@ import Spinner from "../Spinner/Spinner";
 import Loader from "../Loader/Loader";
 import MailBox from "../../Images/Images/NoMsg.png";
 import { useParams } from 'react-router-dom';
-import {io} from 'socket.io-client';
+import { io } from 'socket.io-client';
 
 export default function Form(props) {
   const [Info, setInfo] = useState([]);
@@ -30,7 +30,6 @@ export default function Form(props) {
   useEffect(() => {
     socket?.emit('addUser', IdGlobal);
     socket?.on('getUsers', users => {
-      console.log(users);
     })
     socket?.on('getMessage', ({ MessageId, SenderId, text, Reciever }) => {
       const newItem = { SenderId: SenderId, text: text };
@@ -42,7 +41,7 @@ export default function Form(props) {
     });
     setCheck2(2);
   }, [Check2])
-  
+
 
   const { IdGlobal } = useParams();
 
@@ -123,32 +122,20 @@ export default function Form(props) {
   };
 
   const SendMsg = async () => {
-    socket?.emit('sendMessage', {
-      MessageId: MessageId,
-      SenderId: IdGlobal,
-      text: Text,
-      Reciever: Reciever
-    });
+    if (Text !== '') {
+      socket?.emit('sendMessage', {
+        MessageId: MessageId,
+        SenderId: IdGlobal,
+        text: Text,
+        Reciever: Reciever
+      });
 
-    const formData = {
-      MessageId: MessageId,
-      SenderId: IdGlobal,
-      text: Text,
-    }
-    const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/Conversation`, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-    const jsonData = await response.json();
-    if (jsonData)
-    {
       const formData = {
         MessageId: MessageId,
+        SenderId: IdGlobal,
+        text: Text,
       }
-      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/FindConversation`, {
+      const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/Conversation`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -156,11 +143,24 @@ export default function Form(props) {
         body: JSON.stringify(formData),
       });
       const jsonData = await response.json();
-      setMessages(await jsonData[0].content);
+      if (jsonData) {
+        const formData = {
+          MessageId: MessageId,
+        }
+        const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/FindConversation`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData),
+        });
+        const jsonData = await response.json();
+        setMessages(await jsonData[0].content);
+      }
+      document.getElementById('MessageContent').value = '';
+      const scrollContainer = document.getElementById('Message');
+      scrollContainer.scrollTop = scrollContainer.scrollHeight;
     }
-    document.getElementById('MessageContent').value = '';
-    const scrollContainer = document.getElementById('Message');
-    scrollContainer.scrollTop = scrollContainer.scrollHeight;
   };
 
   const handleText = (e) => {
@@ -168,8 +168,7 @@ export default function Form(props) {
   };
 
   const handleKey = (e) => {
-    if (e.key === "Enter")
-    {
+    if (e.key === "Enter") {
       SendMsg();
     }
   };
@@ -184,20 +183,20 @@ export default function Form(props) {
 
   return (
     <>
-      <NavigationBar/>
+      <NavigationBar />
 
       <div style={{ display: 'none' }} id="Main">
         <div>
           <div style={{ display: 'inline-flex' }}>
-            <img src={UserInfo.img} alt="Profile" className="rounded-circle" width="70" height="76" style={{ marginLeft: '75px', marginTop: '31px' }} />
+            <img src={UserInfo.img} alt="Profile" className="rounded-circle" width="70" height="76" style={{ marginTop: '31px' }} />
             <div style={{ marginTop: '34px' }}>
-              <h4 style={{ marginLeft: '9px' }}>{UserInfo.FirstName} {UserInfo.LastName}</h4>
-              <a href="/" style={{ textDecoration: 'none', color: 'black', marginLeft: '10px' }}>My Account</a>
+              <h4 style={{ marginLeft: '9px', marginTop: '7px' }}>{UserInfo.FirstName} {UserInfo.LastName}</h4>
+              <a href="/" style={{ textDecoration: 'none', color: 'black', marginLeft: '-49px' }}>My Account</a>
             </div>
           </div>
           <div className="Line">
           </div>
-          <h3 style={{ marginLeft: '45px', marginTop: '5px', color: '#00547d' }}>
+          <h3 className="HM-h3" style={{ marginLeft: '-173px', marginTop: '5px', color: '#00547d' }}>
             Messages
           </h3>
           <div className="custom-scrollbar" id="scrollable">
@@ -267,7 +266,7 @@ export default function Form(props) {
           <div className="Type" id="InputOuter">
             <div id="Input" style={{ display: 'none' }}>
               <div class="Message-custom">
-                <input title="Write Message" tabindex="i" pattern="\d+" placeholder="Type Message.." class="MsgInput" type="text" id="MessageContent" onChange={handleText} onKeyDown={handleKey}/>
+                <input title="Write Message" tabindex="i" pattern="\d+" placeholder="Type Message.." class="MsgInput" type="text" id="MessageContent" onChange={handleText} onKeyDown={handleKey} />
                 <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-circle-plus" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#000000" fill="none" stroke-linecap="round" stroke-linejoin="round" className="AttachSVG">
                   <path stroke="none" d="M0 0h24v24H0z" fill="none" />
                   <path d="M12 12m-9 0a9 9 0 1 0 18 0a9 9 0 1 0 -18 0" />

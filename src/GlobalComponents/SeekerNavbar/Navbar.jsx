@@ -10,7 +10,7 @@ import { Tooltip } from '@mui/material';
 import ChatBubbleOutlineIcon from '@mui/icons-material/ChatBubbleOutline';
 
 
-export default function Main() {
+export default function Main(props) {
   const Navigate = useNavigate();
 
   const Logout = () => {
@@ -18,7 +18,7 @@ export default function Main() {
     Navigate('/')
   }
 
-
+  console.log(props.id);
   return (
     <>
       <div className={styles.DashboardNav}>
@@ -76,7 +76,7 @@ export default function Main() {
               <NotificationsNoneIcon className={styles.NavIcon} />
             </Tooltip>
           </div>
-          <div className={styles.NavLink2} onClick={() => Navigate('/Chat/650301995e7ba74240f9dbe9')}>
+          <div className={styles.NavLink2} onClick={() => Navigate(`/Chat/${props.id}`)}>
             <Tooltip
               placement="bottom"
               title="Messages"

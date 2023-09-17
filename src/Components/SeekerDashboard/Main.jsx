@@ -24,6 +24,7 @@ import EventAvailableOutlinedIcon from '@mui/icons-material/EventAvailableOutlin
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import AddIcon from '@mui/icons-material/Add';
 import RemoveIcon from '@mui/icons-material/Remove';
+import { useLocation } from 'react-router-dom';
 
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
@@ -35,7 +36,8 @@ import Requests from '../../GlobalComponents/Requests/Requests'
 
 export default function Main() {
 
-
+    const location = useLocation();
+    const { replace, user } = location.state || {};
     const [postDescription, setdescription] = useState("")
     const [CreatePostModalOpen, SetCreatePostModalOpen] = useState(false)
     const [ViewPost, SetViewPost] = useState(false)
@@ -125,10 +127,9 @@ export default function Main() {
     ]
 
 
-
     return (
         <>
-            <NavigationBar />
+            <NavigationBar id={user}/>
 
 
             <div className={styles.DashWrapper}>

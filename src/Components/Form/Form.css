@@ -1,7 +1,7 @@
 .Centre {
     box-shadow: 1px;
     height: 10%;
-    width: 60%;
+    width: 55%;
     background-color: white;
     margin-left: 26px;
     display: flex;
@@ -131,7 +131,7 @@ h3 {
     background-size: 10px;
     border-radius: 10px;
     transition: 0.3s;
-    margin-left: 848px;
+    margin-left: 782px;
     margin-top: -116px;
     cursor: pointer;
   }
@@ -149,7 +149,7 @@ h3 {
     background-size: 10px;
     border-radius: 10px;
     transition: 0.3s;
-    margin-left: 817px;
+    margin-left: 751px;
     margin-top: -69px;
     cursor: pointer;
   }
@@ -167,7 +167,7 @@ h3 {
     background-size: 10px;
     border-radius: 10px;
     transition: 0.3s;
-    margin-left: 788px;
+    margin-left: 722px;
     margin-top: -164px;
     cursor: pointer;
   }
