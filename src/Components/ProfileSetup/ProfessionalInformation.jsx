@@ -111,20 +111,26 @@ export default function Index() {
             "Interests": interests,
             "EmploymentHistory": employments
         };
-        const Response = Step2(data)
-        if(Response.Success)
-        {
-            Navigate('/personal-profile',{replace : true})
-        }
-        else
-        {
-            notification.open({
-                message: 'Error',
-                description: 'Please fill all the fields',
-                icon: <ErrorIcon style={{ color: 'red' }} />,
-              })
-        }
-
+        Step2(data).then(
+            (response) => {
+                if (response.status === 200) {
+                    notification.success({
+                        message: 'Profile Created Successfully',
+                        description: 'Your profile has been created successfully',
+                        placement: 'bottomRight'
+                    })
+                    Navigate('/personal-profile', { replace: true })
+                }
+            }
+        ).catch(
+            (error) => {
+                notification.error({
+                    message: 'Error',
+                    description: 'Please fill all the fields',
+                    icon: <ErrorIcon style={{ color: 'red' }} />,
+                })
+            }
+        )
     }
 
 
@@ -238,9 +244,9 @@ export default function Index() {
                     </div>
                     <div className={styles.SideContainerv2}>
                         <h5>Employment History</h5>
-                        {employments.length===0 &&
+                        {employments.length === 0 &&
                             <div className={styles.PreviewItem}>
-                            <div className={styles.PreviewTop}>
+                                <div className={styles.PreviewTop}>
                                     <h6><b>Software Engineer</b> at Google, New York </h6>
                                     <div className={styles.deleteBtn}><DeleteOutlined /></div>
                                 </div>
@@ -248,7 +254,7 @@ export default function Index() {
                                 <p className={styles.previewDesc}>
                                     I am a software engineer with 5 years of experience in the field of software development. I have worked on multiple projects and have a good understanding of the software development life cycle.
                                 </p>
-                            </div>    
+                            </div>
                         }
                         {employments.map((employment, index) => (
                             <div key={index} className={styles.PreviewItem}>
@@ -264,41 +270,41 @@ export default function Index() {
                         <div>
                             <h5>Skills</h5>
                             <div className={styles.PreviewSkills}>
-                            {skills.length===0 &&
-                                <div className={styles.PreviewBox}>
-                                    <p>Skills Preview</p>
-                                    <div className={styles.deleteBtn}><DeleteOutlined /></div>
-                                </div>
-                            }
-                            
-                            {skills.map((skill, index) => (
-                                <div key={index} className={styles.PreviewBox}>
-                                    <p>{skill}</p>
-                                    <div className={styles.deleteBtn} onClick={() => handleRemoveSkill(index)}><DeleteOutlined /></div>
-                                </div>
-                            ))}
-                                </div>
+                                {skills.length === 0 &&
+                                    <div className={styles.PreviewBox}>
+                                        <p>Skills Preview</p>
+                                        <div className={styles.deleteBtn}><DeleteOutlined /></div>
+                                    </div>
+                                }
+
+                                {skills.map((skill, index) => (
+                                    <div key={index} className={styles.PreviewBox}>
+                                        <p>{skill}</p>
+                                        <div className={styles.deleteBtn} onClick={() => handleRemoveSkill(index)}><DeleteOutlined /></div>
+                                    </div>
+                                ))}
+                            </div>
                         </div>
 
                         <div>
                             <h5>Interests</h5>
                             <div className={styles.PreviewSkills}>
-                            {interests.length===0 &&
-                                <div className={styles.PreviewBox}>
-                                    <p>Interests Preview</p>
-                                    <div className={styles.deleteBtn}><DeleteOutlined /></div>
-                                </div>
-                            }
-                            {interests.map((interest, index) => (
-                                <div key={index} className={styles.PreviewBox}>
-                                    <p>{interest}</p>
-                                    <div className={styles.deleteBtn} onClick={() => handleRemoveInterest(index)}><DeleteOutlined /></div>
-                                </div>
-                            ))}
-                        </div>
-                        <div className={styles.Button}>
-                            <button onClick={Next}>Next</button>
-                        </div>
+                                {interests.length === 0 &&
+                                    <div className={styles.PreviewBox}>
+                                        <p>Interests Preview</p>
+                                        <div className={styles.deleteBtn}><DeleteOutlined /></div>
+                                    </div>
+                                }
+                                {interests.map((interest, index) => (
+                                    <div key={index} className={styles.PreviewBox}>
+                                        <p>{interest}</p>
+                                        <div className={styles.deleteBtn} onClick={() => handleRemoveInterest(index)}><DeleteOutlined /></div>
+                                    </div>
+                                ))}
+                            </div>
+                            <div className={styles.Button}>
+                                <button onClick={Next}>Next</button>
+                            </div>
 
                         </div>
                     </div>

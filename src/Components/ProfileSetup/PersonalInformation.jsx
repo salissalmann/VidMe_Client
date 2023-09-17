@@ -6,8 +6,6 @@ import customParseFormat from 'dayjs/plugin/customParseFormat';
 import { DeleteOutlined } from '@ant-design/icons'
 import { useNavigate } from 'react-router-dom';
 import { Step3 } from './API'
-import ErrorIcon from '@mui/icons-material/Error';
-import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { notification } from 'antd'
 
 
@@ -172,18 +170,26 @@ export default function Index() {
             SocialLinks: socialLinks
         };
         Step3(data).then(
-            (Response) => {
-                if (Response.Success) {
+            (response) => {
+                console.log(response)
+                if (response.status === 200) {
+                    notification.success({
+                        message: 'Profile Created Successfully',
+                        description: 'Your profile has been created successfully',
+                        placement: 'bottomRight'
+                    })
                     Navigate('/video-recorder', { replace: true })
                 }
-                else {
-                    notification.open({
-                        message: 'Error',
-                        description: 'Please fill all the fields',
-                        icon: <ErrorIcon style={{ color: 'red' }} />,
-                    })
-                }
             }
+        ).catch(
+            (error) => {
+                notification.error({
+                    message: 'Error',
+                    description: 'Something went wrong',
+                    placement: 'bottomRight'
+                })
+            }
+
         )
 
     }
@@ -330,7 +336,7 @@ export default function Index() {
                         </div>
 
 
-                        
+
 
 
 

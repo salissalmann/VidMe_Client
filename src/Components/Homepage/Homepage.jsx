@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 import styles from './Homepage.module.css';
 import { useNavigate } from 'react-router-dom';
-import {Login} from './API'
+import { Login } from './API'
 import ErrorIcon from '@mui/icons-material/Error';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
-import {notification} from 'antd'
+import { notification } from 'antd'
 
 export default function Homepage() {
   const [email, setEmail] = useState('');
@@ -13,35 +13,30 @@ export default function Homepage() {
 
   const handleEmailChange = (e) => { setEmail(e.target.value); };
   const handlePasswordChange = (e) => { setPassword(e.target.value); };
-  let navigate=useNavigate();
+  let navigate = useNavigate();
 
 
-  const handleCreateAccount =() => {
+  const handleCreateAccount = () => {
     setLoading(true);
     Login(email, password)
-      .then(async(res) => {
+      .then(async (res) => {
         const ResponseToJson = await res.json()
         setLoading(false);
         if (ResponseToJson.Success) {
           localStorage.setItem('token', ResponseToJson.AuthToken);
-          if(ResponseToJson.ProfileStatus === "0%" )
-          {
+          if (ResponseToJson.ProfileStatus === "0%") {
             navigate('/create-profile', { replace: true });
           }
-          else if(ResponseToJson.ProfileStatus === "33%" )
-          {
+          else if (ResponseToJson.ProfileStatus === "33%") {
             navigate('/professional-profile', { replace: true });
           }
-          else if(ResponseToJson.ProfileStatus === "66%" )
-          {
+          else if (ResponseToJson.ProfileStatus === "66%") {
             navigate('/personal-profile', { replace: true });
           }
-          else if(ResponseToJson.ProfileStatus === "99%" )
-          {
-            navigate('/video-recorder',{replace : true})
+          else if (ResponseToJson.ProfileStatus === "99%") {
+            navigate('/video-recorder', { replace: true })
           }
-          else if(ResponseToJson.ProfileStatus === "100%" )
-          {
+          else if (ResponseToJson.ProfileStatus === "100%") {
             navigate('/dashboard', { replace: true });
           }
           notification.open({
@@ -117,7 +112,11 @@ export default function Homepage() {
 
               <div className={styles['Login-Link']}>
                 <p>
-                  Don't have an account? <span><a href="/create-account">Create Account</a></span>
+                  Don't have an account? <span onClick={
+                    () => {
+                      navigate('/create-account', { replace: true });
+                    }
+                  }>Create Account</span>
                 </p>
               </div>
             </div>
