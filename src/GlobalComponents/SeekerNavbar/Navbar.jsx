@@ -76,7 +76,7 @@ export default function Main() {
               <NotificationsNoneIcon className={styles.NavIcon} />
             </Tooltip>
           </div>
-          <div className={styles.NavLink2} onClick={() => Navigate('/messages')}>
+          <div className={styles.NavLink2} onClick={() => Navigate('/Chat/650301995e7ba74240f9dbe9')}>
             <Tooltip
               placement="bottom"
               title="Messages"
