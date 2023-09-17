@@ -43,6 +43,7 @@ export default function Index() {
 
     const NextStep = () => {
         const data = {
+            "ProfilePicture": "https://premedpk-cdn.sgp1.cdn.digitaloceanspaces.com/CDN/UniLogos/AKU-Logo.png",
             "WantedJob": JobTitle,
             "Gender": Gender,
             "DOB": DateOfBirth,
@@ -52,18 +53,27 @@ export default function Index() {
             'ProfessionalSummary': professionalInfo
         };
 
-        const Response = Step1(data)
-        if (Response.Success) {
-            Navigate('/professional-profile', { replace: true })
-        }
-        else {
-            notification.open({
-                message: 'Error',
-                description: 'Please fill all the fields',
-                icon: <ErrorIcon style={{ color: 'red' }} />,
-            })
-        }
-
+        Step1(data).then(
+            (response) => {
+                console.log(response)
+                if (response.status === 200) {
+                    notification.success({
+                        message: 'Profile Created Successfully',
+                        description: 'Your profile has been created successfully',
+                        placement: 'bottomRight'
+                    })
+                    Navigate('/professional-profile', { replace: true })
+                }
+            }
+        ).catch(
+            (error) => {
+                notification.error({
+                    message: 'Error',
+                    description: 'Something went wrong',
+                    placement: 'bottomRight'
+                })
+            }
+        )
     }
 
 

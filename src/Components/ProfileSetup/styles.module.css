@@ -1,6 +1,7 @@
 .CreateProfile {
-    background-image: linear-gradient(to right top, #60d7e9, #8cddf7, #b2e2fe, #d1e9ff, #eaf1ff, #eaf1ff, #eaf1ff, #eaf1ff, #d1e9ff, #b2e2fe, #8cddf7, #60d7e9);   width: 100%;
-    height:fit-content;
+    background-image: linear-gradient(to right top, #60d7e9, #8cddf7, #b2e2fe, #d1e9ff, #eaf1ff, #eaf1ff, #eaf1ff, #eaf1ff, #d1e9ff, #b2e2fe, #8cddf7, #60d7e9);
+    width: 100%;
+    height: fit-content;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -22,21 +23,22 @@
     background-color: white;
     border-radius: 2rem;
     border-bottom-right-radius: 0%;
-    border-top-right-radius: 0%;    
+    border-top-right-radius: 0%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
+
 .SideContainer2 {
-    background: rgba( 255, 255, 255, 0.5 );
+    background: rgba(255, 255, 255, 0.5);
     border-radius: 2rem;
-    backdrop-filter: blur( 18px );
-    -webkit-backdrop-filter: blur( 18px );
-    border: 1px solid rgba( 255, 255, 255, 0.18 );    
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
+    border: 1px solid rgba(255, 255, 255, 0.18);
     font-family: 'Nunito';
     padding: 3rem;
     border-bottom-left-radius: 0%;
-    border-top-left-radius: 0%;    
+    border-top-left-radius: 0%;
 
 }
 
@@ -49,11 +51,12 @@
     border-top-right-radius: 0%;
 
 }
-.Form
-{
+
+.Form {
     margin-left: 1rem;
     margin-top: 1rem;
 }
+
 .Details {
     display: grid;
     grid-template-columns: 50% 50%;
@@ -64,6 +67,7 @@
     font-weight: 400;
     text-align: left;
 }
+
 .Details2 {
     padding-left: 1rem;
     display: flex;
@@ -105,6 +109,7 @@
     border: 1px solid #A9A9A9;
     background-color: transparent;
 }
+
 .UploadButton {
     display: flex;
     width: 100%;
@@ -195,6 +200,7 @@
     transition: .3s ease all;
     border: 1px solid white;
 }
+
 .Button button:hover {
     background-color: transparent;
     border: 1px solid #469293;
@@ -222,14 +228,14 @@
     padding: 0.8rem;
     font-size: 0.8rem;
     font-weight: 500;
-    background-color:#469293;
+    background-color: #469293;
 }
 
 .SideContainerv1 {
     background-color: white;
     border-radius: 2rem;
     border-bottom-right-radius: 0%;
-    border-top-right-radius: 0%;    
+    border-top-right-radius: 0%;
     display: flex;
     padding: 3rem;
     flex-direction: column;
@@ -242,6 +248,7 @@
     text-align: left;
     margin-top: 1rem;
 }
+
 .SideContainerv1 p {
     margin-left: 0.5rem;
     font-weight: 300;
@@ -249,14 +256,14 @@
     text-align: left;
 }
 
-.EmployementDiv
-{
+.EmployementDiv {
     display: grid;
     grid-template-columns: 50% 50%;
     text-align: left;
 }
+
 .EmployementField {
-    background-color:#EFF2F9;
+    background-color: #EFF2F9;
     border: none;
     padding: 0.5rem;
     margin-top: -0.2rem;
@@ -278,12 +285,12 @@
     border: 1px solid #A9A9A9;
     background-color: transparent;
 }
-.FormX
-{
+
+.FormX {
     display: flex;
 }
-.DescDiv
-{
+
+.DescDiv {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -295,7 +302,7 @@
 }
 
 .TextFieldProf {
-    background-color:#EFF2F9;
+    background-color: #EFF2F9;
     border: none;
     padding: 0.5rem;
     margin-top: 0.5rem;
@@ -317,15 +324,15 @@
     border: 1px solid #A9A9A9;
     background-color: transparent;
 }
-.DescDiv2
-{
+
+.DescDiv2 {
     display: flex;
     justify-content: flex-end;
     align-items: center;
     width: 100%;
 }
-.DescDiv2 button
-{
+
+.DescDiv2 button {
     width: 40%;
     background-color: #469293;
     border: none;
@@ -338,22 +345,22 @@
     margin-right: 1rem;
     margin-top: 1rem;
 }
+
 .DescDiv2 button:hover {
     background-color: transparent;
     border: 1px solid #469293;
     color: #469293;
 }
 
-.EmployementDiv2
-{
+.EmployementDiv2 {
     display: grid;
     grid-template-columns: 70% 30%;
     text-align: left;
 }
-.EmployementDiv2 button
-{
+
+.EmployementDiv2 button {
     width: 100%;
-    background-color: #469293;    
+    background-color: #469293;
     border: none;
     color: white;
     padding: 0.5rem;
@@ -361,6 +368,7 @@
     transition: .3s ease all;
     border: 1px solid #469293;
 }
+
 .EmployementDiv2 button:hover {
     background-color: transparent;
     border: 1px solid #469293;
@@ -368,15 +376,16 @@
 }
 
 .SideContainerv2 {
-    background:white;
+    background: white;
     border-radius: 2rem;
-    border: 1px solid rgba( 255, 255, 255, 0.18 );    
+    border: 1px solid rgba(255, 255, 255, 0.18);
     font-family: 'Nunito';
     padding: 3rem;
     border-bottom-left-radius: 0%;
-    border-top-left-radius: 0%;    
+    border-top-left-radius: 0%;
 
 }
+
 .SideContainerv2 h5 {
     margin-left: 0.5rem;
     font-weight: 600;
@@ -384,8 +393,8 @@
     text-align: left;
     margin-top: 1rem;
 }
-.PreviewItem
-{
+
+.PreviewItem {
     padding: 1rem;
     background-color: transparent;
     display: flex;
@@ -394,87 +403,205 @@
     flex-direction: column;
     margin-top: 1rem;
     text-align: left;
-    -webkit-box-shadow: 10px 11px 16px -8px rgba(209,205,209,1);
-    -moz-box-shadow: 10px 11px 16px -8px rgba(209,205,209,1);
-    box-shadow: 10px 11px 16px -8px rgba(209,205,209,1);
+    -webkit-box-shadow: 10px 11px 16px -8px rgba(209, 205, 209, 1);
+    -moz-box-shadow: 10px 11px 16px -8px rgba(209, 205, 209, 1);
+    box-shadow: 10px 11px 16px -8px rgba(209, 205, 209, 1);
 }
-.previewDate
-{
+
+.previewDate {
     font-size: 0.8rem;
     font-weight: 300;
     color: rgb(44, 44, 44);
     margin-top: -0.5rem;
 }
-.previewDesc
-{
+
+.previewDesc {
     font-size: 0.9rem;
     font-weight: 500;
     margin-top: -0.5rem;
     color: black;
     text-align: justify;
 }
- 
-.PreviewTop
-{
+
+.PreviewTop {
     display: flex;
     justify-content: space-between;
     align-items: center;
 }
-.deleteBtn
-{
+
+.deleteBtn {
     border: none;
     font-size: 1.2rem;
     cursor: pointer;
     transition: .3s ease all;
 }
-.PreviewSkills
-{
+
+.PreviewSkills {
     display: flex;
     flex-wrap: wrap;
 }
-.PreviewBox
-{
+
+.PreviewBox {
     display: flex;
-    justify-content:space-between;
+    justify-content: space-between;
     font-weight: 300;
     border-top: 1px solid rgb(185, 185, 185);
     border-left: 1px solid rgb(185, 185, 185);
     margin-top: 1rem;
     text-align: left;
-    -webkit-box-shadow: 10px 11px 16px -8px rgba(209,205,209,1);
-    -moz-box-shadow: 10px 11px 16px -8px rgba(209,205,209,1);
-    box-shadow: 10px 11px 16px -8px rgba(209,205,209,1);
+    -webkit-box-shadow: 10px 11px 16px -8px rgba(209, 205, 209, 1);
+    -moz-box-shadow: 10px 11px 16px -8px rgba(209, 205, 209, 1);
+    box-shadow: 10px 11px 16px -8px rgba(209, 205, 209, 1);
     margin-right: 1rem;
     padding-left: 1rem;
     padding-right: 1rem;
 }
-.PreviewBox p
-{
+
+.PreviewBox p {
     margin-right: 1rem;
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
     font-size: 0.9rem;
     font-weight: 500;
 }
-.RecordingContainer
-{
+
+.RecordingContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin-top: 0.5rem;
-    width:80%;
+    width: 85vw;
+    height: 40vw;
     padding: 0.5rem;
-    background: rgba( 255, 255, 255, 0.5 );
-    backdrop-filter: blur( 18px );
-    -webkit-backdrop-filter: blur( 18px );
-    border: 1px solid rgba( 255, 255, 255, 0.18 );    
+    backdrop-filter: blur(18px);
+    -webkit-backdrop-filter: blur(18px);
     font-family: 'Nunito';
     border-radius: 0.5rem;
 }
-.RecordingContainer img
-{
-    width: 700px;
-    height: 400px;
+
+.InitialVideoBox {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    border-radius: 0.5rem;
+    gap: 3rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+    border: 1px solid rgb(223, 221, 221);
+    background-color: white;
+    padding: 3rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+}
+
+.videoDisplay {
+    width: 85vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    border-radius: 0.5rem;
+    border: 1px solid rgb(223, 221, 221);
+    background-color: white;
+    padding: 3rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+    z-index: -1;
+}
+
+.Video {
+    width: 100%;
+    height: 30vw;
+    object-fit: contain;
+    border-radius: 1rem;
+}
+
+.RecordingContainer img {
+    width: 40vw;
+    height: 30vw;
+    object-fit: contain;
+    border-radius: 1rem;
+    margin-top: 2rem;
+    -webkit-border-radius: ;
+    -moz-border-radius: ;
+    -ms-border-radius: ;
+    -o-border-radius: ;
+}
+
+.Pointers {
+    display: flex;
+    align-items: center;
+    margin-top: 1rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-bottom: 1rem;
+}
+
+.Pointers h6 {
+    margin-left: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.Icon {
+    width: 1.2rem;
+    height: 1.2rem;
     object-fit: cover;
+}
+
+.PointersDetails {
+    display: flex;
+    flex-direction: column;
+    margin-top: -1rem;
+    font-weight: 600;
+    font-size: 0.8rem;
+    margin-left: 2rem;
+    margin-bottom: -0.5rem;
+    text-align: justify;
+}
+
+.ButtonDiv {
+    width: 84vw;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem;
+    border: 1px solid rgb(223, 221, 221);
+    background-color: white;
+    padding: 1rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+}
+
+.ButtonDiv button {
+    width: fit-content;
+    background-color: #469293;
+    border: none;
+    color: white;
+    padding: 0.5rem 2rem;
+    border-radius: 0.2rem;
+    cursor: pointer;
+    transition: .3s ease all;
+    border: 1px solid white;
+    -webkit-transition: .3s ease all;
+    -moz-transition: .3s ease all;
+    -ms-transition: .3s ease all;
+    -o-transition: .3s ease all;
+}
+
+.ButtonDiv button:hover {
+    background-color: transparent;
+    border: 1px solid #469293;
+    color: #469293;
 }

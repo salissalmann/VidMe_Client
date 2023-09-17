@@ -1,11 +1,12 @@
 export async function Step1 (data) {
-    const Response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/seeker/profile`, {
+    return fetch(`${process.env.REACT_APP_SERVER_URL}/api/seeker/profile`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization-Token' : localStorage.getItem('token'),
         },
         body: JSON.stringify({
+            ProfilePicture: data.ProfilePicture,
             WantedJob: data.WantedJob,
             Gender: data.Gender,
             DOB: data.DOB,
@@ -15,12 +16,10 @@ export async function Step1 (data) {
             ProfessionalSummary: data.ProfessionalSummary
         })
     })
-    const ResponseData = await Response.json()
-    return ResponseData
 }
 
 export async function Step2 (data) {
-    const Response = await fetch(
+    return fetch(
         `${process.env.REACT_APP_SERVER_URL}/api/seeker/profile/professional`,
         {
             method: 'POST',
@@ -35,13 +34,10 @@ export async function Step2 (data) {
             })
         }
     )
-    const ResponseData = await Response.json()
-    return ResponseData
 }
 
 export async function Step3 (data) {
-    const Response = await fetch(
-        `${process.env.REACT_APP_SERVER_URL}/api/seeker/profile/personal`,
+    return fetch(`${process.env.REACT_APP_SERVER_URL}/api/seeker/profile/personal`,
         {
             method: 'POST',
             headers: {
@@ -57,9 +53,24 @@ export async function Step3 (data) {
             })
         }
     )
-    const ResponseData = await Response.json()
-    return ResponseData
 }
+
+export async function Step4 (data) {
+    return fetch(`${process.env.REACT_APP_SERVER_URL}/api/seeker/profile/video`,
+        {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization-Token' : localStorage.getItem('token'),
+            },
+            body: JSON.stringify({
+                Video: data.Video
+            })
+        }
+    )
+}
+
+    
 
 
             
