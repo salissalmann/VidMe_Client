@@ -7,6 +7,7 @@ import ProfessionalProfile from './Components/ProfileSetup/ProfessionalInformati
 import PersonalInformation from './Components/ProfileSetup/PersonalInformation'
 import VideoRecorder from './Components/ProfileSetup/RecordYourself';
 import SeekerDashboard from './Components/SeekerDashboard/Main.jsx'
+import FriendSuggestions from './Components/Suggestions/Suggestions'
 
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
             <Route path="/personal-profile" element={<PersonalInformation/>} />
             <Route path="/video-recorder" element={<VideoRecorder/>} />
             <Route path="/dashboard" element={<SeekerDashboard/>} />
+            <Route path="/suggestions" element={<FriendSuggestions/>} />
 
           </Routes>
         </BrowserRouter>

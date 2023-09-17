@@ -1,0 +1,144 @@
+/*========================================================*/
+.DashboardContainer3Div {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-content: center;
+    border: 1px solid rgb(223, 221, 221);
+    padding: 1rem;
+    background-color: white;
+    text-align: left;
+    gap: 0.5rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+    box-shadow: 0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
+}
+
+.DashboardContainer3Div h6 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito';
+    color: #676666;
+}
+
+
+.RequestsContainerDiv {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+    width: 100%;
+    gap: 0.4rem;
+}
+
+.RequestsContainerDiv img {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 25%;
+    object-fit: cover;
+}
+
+.RequestsContainerDivInner {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+
+}
+
+.RequestsContainerButtons {
+    display: flex;
+    justify-content: flex-end;
+    align-content: center;
+    align-items: center;
+    width: 100%;
+    gap: 0.5rem;
+}
+
+.AcceptButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #1f66ff;
+    border-radius: 2rem;
+    border: 1px solid #1f66ff;
+    color: white;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Nunito';
+    padding: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    transition-duration: 1s;
+    -webkit-border-radius: 2rem;
+    -moz-border-radius: 2rem;
+    -ms-border-radius: 2rem;
+    -o-border-radius: 2rem;
+    transition-duration: 0.5s;
+}
+
+.AcceptButton:hover {
+    border: 1px solid #1f66ff;
+    box-shadow: inset -8px 0px 10px rgba(0, 0, 0, .1);
+    color: #1f66ff;
+    background-color: transparent;
+}
+
+.RejectButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(204, 204, 204);
+    border-radius: 2rem;
+    border: 1px solid rgb(204, 204, 204);
+    color: rgb(102, 102, 102);
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: 'Nunito';
+    padding: 0.5rem;
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+    transition-duration: 1s;
+}
+
+.RejectButton:hover {
+    border: 1px solid rgb(204, 204, 204);
+    box-shadow: inset -8px 0px 10px rgba(0, 0, 0, .1);
+    color: rgb(204, 204, 204);
+    background-color: transparent;
+}
+
+.PostDiv1Inner {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    flex-direction: column;
+}
+
+.PostDiv1Inner h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito';
+    font-weight: 700;
+    color: #343434;
+}
+
+.PostDiv1Inner p {
+    font-size: 0.8rem;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito';
+    color: #343434;
+}

@@ -1,0 +1,106 @@
+.ProfileBox {
+    display: flex;
+    justify-content: center;
+    align-content: flex-start;
+    gap: 1rem;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
+    text-align: left;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+    border: 1px solid rgb(223, 221, 221);
+    background-color: white;
+}
+
+.ProfileBox img {
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -ms-border-radius: 100%;
+    -o-border-radius: 100%;
+    margin-left: -2rem;
+}
+
+.ProfileBoxName h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+}
+
+.ProfileBoxName p {
+    font-size: 0.85rem;
+    font-weight: 400;
+    margin: 0;
+    padding: 0;
+}
+
+
+/*-----------------------------------------------------------------------------------*/
+
+.NavigationSideBar {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-content: center;
+    box-shadow: 0 0 0.5rem 0.1rem rgba(0, 0, 0, 0.1);
+    text-align: left;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    border-radius: 0.3rem;
+    -webkit-border-radius: 0.3rem;
+    -moz-border-radius: 0.3rem;
+    -ms-border-radius: 0.3rem;
+    -o-border-radius: 0.3rem;
+    border: 1px solid rgb(223, 221, 221);
+    margin-top: 1rem;
+    padding: 1rem;
+    background-color: white;
+    padding-bottom: 0;
+}
+
+.NavigationSideBarDiv {
+    display: flex;
+    justify-content: flex-start;
+    align-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+    width: 100%;
+    border-bottom: 1px solid #e6e6e6;
+}
+
+.NavigationSideBarDiv h3 {
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito';
+    font-weight: 700;
+    color: #343434;
+}
+
+.NavIcon {
+    width: 1.5rem;
+    height: 1.5rem;
+    color: #343434;
+}
+
+.NavigationSideBar h6 {
+    font-size: 0.8rem;
+    font-weight: 600;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito';
+    color: #676666;
+    margin-bottom: 1rem;
+}
