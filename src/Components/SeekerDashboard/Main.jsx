@@ -1,11 +1,7 @@
 import React, { useState } from 'react';
 import styles from './styles.module.css';
 import NavigationBar from '../../GlobalComponents/SeekerNavbar/Navbar';
-import WindowIcon from '@mui/icons-material/Window';
 import PeopleAltIcon from '@mui/icons-material/PeopleAlt';
-import ExploreIcon from '@mui/icons-material/Explore';
-import SettingsIcon from '@mui/icons-material/Settings';
-import WorkspacesIcon from '@mui/icons-material/Workspaces';
 import InsertLinkIcon from '@mui/icons-material/InsertLink';
 import ImageIcon from '@mui/icons-material/Image';
 import SwitchVideoIcon from '@mui/icons-material/SwitchVideo';
@@ -20,19 +16,7 @@ import CircleOutlinedIcon from '@mui/icons-material/CircleOutlined';
 import VisibilityOffOutlinedIcon from '@mui/icons-material/VisibilityOffOutlined';
 import { CaretDownOutlined, GlobalOutlined } from '@ant-design/icons'
 import { ShareAltOutlined } from '@ant-design/icons';
-
 import PostDisplay from '../../GlobalComponents/PostDisplay/PostDisplay';
-
-import { useNavigate } from 'react-router-dom';
-
-
-import NewspaperOutlinedIcon from '@mui/icons-material/NewspaperOutlined';
-import Diversity3OutlinedIcon from '@mui/icons-material/Diversity3Outlined';
-import BookmarkBorderOutlinedIcon from '@mui/icons-material/BookmarkBorderOutlined';
-import PeopleAltOutlinedIcon from '@mui/icons-material/PeopleAltOutlined';
-import PersonAddOutlinedIcon from '@mui/icons-material/PersonAddOutlined';
-import BarChartOutlinedIcon from '@mui/icons-material/BarChartOutlined';
-import LogoutOutlinedIcon from '@mui/icons-material/LogoutOutlined';
 
 import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
 import CheckCircleOutlineOutlinedIcon from '@mui/icons-material/CheckCircleOutlineOutlined';
@@ -44,6 +28,11 @@ import RemoveIcon from '@mui/icons-material/Remove';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 
+import LeftSideBar from '../../GlobalComponents/Dashboard-LeftSideBar/Dash-SideBar-L'
+import Requests from '../../GlobalComponents/Requests/Requests'
+
+
+
 export default function Main() {
 
 
@@ -51,13 +40,9 @@ export default function Main() {
     const [CreatePostModalOpen, SetCreatePostModalOpen] = useState(false)
     const [ViewPost, SetViewPost] = useState(false)
     const [PostDisplayID, SetPostDisplayID] = useState("")
-
     const [CreatePollModalOpen, SetCreatePollModalOpen] = useState(false)
-
     const [CreateEventModal, SetCreateEventModalOpen] = useState(false)
-
     const [CreateArticleModal, SetCreateArticleModalOpen] = useState(false)
-
 
     function formatTimestamp(timestamp) {
         const parsedTimestamp = parseISO(timestamp.$date);
@@ -139,35 +124,6 @@ export default function Main() {
         }
     ]
 
-    const MockRequests = [
-        {
-            "_id": {
-                "$oid": "64dbfaee2c685d3f00177ad1"
-            },
-            "Email": "demo@premed.pk",
-            "FullName": "Demo Premed",
-            "Title": "React Developer",
-            "ProfileImageLink": "https://premedpk-cdn.sgp1.cdn.digitaloceanspaces.com/CustomImages/1.png"
-        },
-        {
-            "_id": {
-                "$oid": "64dc01cc2c685d3f00177ad2"
-            },
-            "Email": "Abdul Hai",
-            "FullName": "Abdul Hai",
-            "Title": "Angular Developer",
-            "ProfileImageLink": "https://premedpk-cdn.sgp1.cdn.digitaloceanspaces.com/CustomImages/2.png"
-        },
-        {
-            "_id": {
-                "$oid": "64dc9b3e2c685d3f00177ada"
-            },
-            "Email": "hasanmurad0@gmail.com",
-            "FullName": "Hasan Murad",
-            "Title": ".Net Developer",
-            "ProfileImageLink": "https://premedpk-cdn.sgp1.cdn.digitaloceanspaces.com/CustomImages/3.png"
-        },
-    ]
 
 
     return (
@@ -178,55 +134,7 @@ export default function Main() {
             <div className={styles.DashWrapper}>
                 <div className={styles.DashboardDivsContainer}>
                     <div className={styles.DashboardContainer1}>
-                        <div className={styles.ProfileBox}>
-                            <img src="/StaticImages/MockProfile.jpeg" alt="profile" className='NavProfileImage' />
-                            <div className={styles.ProfileBoxName}>
-                                <h3>Salis Salman</h3>
-                                <p>{GenerateUsername("Salis", "Salman")}</p>
-                            </div>
-                        </div>
-                        <div className={styles.NavigationSideBar}>
-                            <h6>
-                                Feed
-                            </h6>
-                            <div className={styles.NavigationSideBarDiv}>
-                                <NewspaperOutlinedIcon className={styles.NavIcon} style={{ color: "red" }} />
-                                <h3>News Feed</h3>
-                            </div>
-                            <div className={styles.NavigationSideBarDiv}>
-                                <Diversity3OutlinedIcon className={styles.NavIcon} style={{ color: "#FFC107" }} />
-                                <h3>Groups</h3>
-                            </div>
-                            <div className={styles.NavigationSideBarDiv}>
-                                <BookmarkBorderOutlinedIcon className={styles.NavIcon} style={{ color: "#4CAF50" }} />
-                                <h3>Saved Posts</h3>
-                            </div>
-                            <div className={styles.NavigationSideBarDiv}>
-                                <PeopleAltOutlinedIcon className={styles.NavIcon} style={{ color: "#2196F3" }} />
-                                <h3>Friends</h3>
-                            </div>
-                            <div className={styles.NavigationSideBarDiv}>
-                                <PersonAddOutlinedIcon className={styles.NavIcon} style={{ color: "#9C27B0" }} />
-                                <h3>Suggestions</h3>
-                            </div>
-                        </div>
-                        <div className={styles.NavigationSideBar}>
-                            <h6>
-                                Account
-                            </h6>
-                            <div className={styles.NavigationSideBarDiv}>
-                                <SettingsIcon className={styles.NavIcon} style={{ color: "#FFC107" }} />
-                                <h3>Settings</h3>
-                            </div>
-                            <div className={styles.NavigationSideBarDiv}>
-                                <BarChartOutlinedIcon className={styles.NavIcon} style={{ color: "#4CAF50" }} />
-                                <h3>Analytics</h3>
-                            </div>
-                            <div className={styles.NavigationSideBarDiv}>
-                                <LogoutOutlinedIcon className={styles.NavIcon} style={{ color: "#F44336" }} />
-                                <h3>Logout</h3>
-                            </div>
-                        </div>
+                        <LeftSideBar />
                     </div>
                     <div className={styles.DashboardContainer2}>
                         <div className={styles.AddPost}>
@@ -313,28 +221,7 @@ export default function Main() {
                         }
                     </div>
                     <div className={styles.DashboardContainer3}>
-                        <div className={styles.DashboardContainer3Div}>
-                            <h6>Requests</h6>
-                            {
-                                MockRequests.map((request) => {
-                                    return (
-                                        <div className={styles.RequestsContainer}>
-                                            <div className={styles.RequestsContainerDiv}>
-                                                <img src={request.ProfileImageLink} alt="profile" className='NavProfileImage' />
-                                                <div className={styles.PostDiv1Inner}>
-                                                    <h3>{request.FullName}</h3>
-                                                    <p>{request.Title}</p>
-                                                </div>
-                                                <div className={styles.RequestsContainerButtons}>
-                                                    <button className={styles.AcceptButton}>Accept</button>
-                                                    <button className={styles.RejectButton}>Reject</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    )
-                                })
-                            }
-                        </div>
+                        <Requests />
                     </div>
                 </div>
             </div>
@@ -377,12 +264,6 @@ export default function Main() {
     )
 }
 
-const GenerateUsername = (firstName, lastName) => {
-    let username = firstName + "-" + lastName;
-    username = "@" + username
-
-    return username.toLowerCase();
-}
 
 const CreatePost = ({ closeModal }) => {
 

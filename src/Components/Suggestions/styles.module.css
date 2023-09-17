@@ -1,0 +1,87 @@
+.DashWrapper {
+    display: flex;
+    justify-content: center;
+    margin-top: 2rem;
+}
+
+.DashboardDivsContainer {
+    display: grid;
+    grid-template-columns: 20% 55% 25%;
+    flex-direction: row;
+    gap: 1rem;
+    justify-content: space-between;
+    align-content: center;
+    width: 90%;
+    height: 100%;
+}
+
+.Title h1 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 1rem;
+}
+
+.SuggestionCard {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    background-color: #FFFFFF;
+    border-radius: 0.5rem;
+    padding: 1rem;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+}
+
+.SuggestionCard h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #000000;
+    margin-bottom: 1rem;
+}
+
+.SuggestionImageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.SuggestionImageContainer img {
+    width: 3.5rem;
+    height: 3.5rem;
+    object-fit: cover;
+    border-radius: 0.5rem;
+    -webkit-border-radius: 0.5rem;
+    -moz-border-radius: 0.5rem;
+    -ms-border-radius: 0.5rem;
+    -o-border-radius: 0.5rem;
+}
+
+
+.PostDiv1Inner {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+    flex-direction: column;
+}
+
+.PostDiv1Inner h4 {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito';
+    font-weight: 700;
+    color: #343434;
+    text-align: left;
+}
+
+.PostDiv1Inner h6 {
+    font-size: 0.85rem;
+    font-weight: 300;
+    margin: 0;
+    padding: 0;
+    font-family: 'Nunito';
+    color: #888888;
+}

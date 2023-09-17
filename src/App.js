@@ -8,6 +8,7 @@ import PersonalInformation from './Components/ProfileSetup/PersonalInformation'
 import VideoRecorder from './Components/ProfileSetup/RecordYourself';
 import SeekerDashboard from './Components/SeekerDashboard/Main.jsx'
 import Form from './Components/Form/Form'
+import FriendSuggestions from './Components/Suggestions/Suggestions'
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
           <Route path="/video-recorder" element={<VideoRecorder />} />
           <Route path="/dashboard" element={<SeekerDashboard />} />
           <Route path="/Chat/:IdGlobal" element={<Form/>}/>
+          <Route path="/suggestions" element={<FriendSuggestions/>} />
         </Routes>
       </BrowserRouter>
     </div>
