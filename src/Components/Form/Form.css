@@ -22,7 +22,7 @@ h3 {
 
 .custom-scrollbar {
     width: 350px;
-    height: 550px;
+    height: 470px;
     overflow-y: scroll;
     overflow-x: hidden;
     position: relative;
@@ -56,11 +56,10 @@ h3 {
     height: 530px;
     width: 100%;
     overflow-x: hidden;
-    overflow-y: scroll;
+    overflow-y: auto;
     border: 2px solid lightgray;
     border-top: none;
     border-bottom: none;
-    border-right: none;
 }
 
 .Message::-webkit-scrollbar {
@@ -86,6 +85,10 @@ h3 {
     border-top: none;
 }
 
+.InputLength {
+  width: 723px;
+}
+
 .input1 {
     width: 100%;
     height: 100%;
@@ -101,12 +104,13 @@ h3 {
 }
 
 .Message-custom {
-    width: 88%;
+    width: 100%;
     height: 40px;
     border-radius: 10px;
     background-color: #c5c6de;
     transform: translate(0px,0px);
     box-shadow: 5px 5px #595963;
+    display: inline-flex;
   }
   
   .MsgInput {
@@ -131,8 +135,6 @@ h3 {
     background-size: 10px;
     border-radius: 10px;
     transition: 0.3s;
-    margin-left: 782px;
-    margin-top: -116px;
     cursor: pointer;
   }
   
@@ -149,8 +151,6 @@ h3 {
     background-size: 10px;
     border-radius: 10px;
     transition: 0.3s;
-    margin-left: 751px;
-    margin-top: -69px;
     cursor: pointer;
   }
   
@@ -167,8 +167,6 @@ h3 {
     background-size: 10px;
     border-radius: 10px;
     transition: 0.3s;
-    margin-left: 722px;
-    margin-top: -164px;
     cursor: pointer;
   }
   
@@ -184,4 +182,84 @@ h3 {
     background-color: #595963;
     transform: translate(-20px,5px);
   }
+  
+  .InputContainer {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    overflow: hidden;
+    cursor: pointer;
+    padding-left: 15px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.075);
+    width: 260px;
+    margin-left: 17%;
+  }
+  
+  .input {
+    width: 260px;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 0.9em;
+    caret-color: #00547d;
+  }
+  
+  .labelforsearch {
+    cursor: text;
+    padding: 0px 12px;
+  }
+  
+  .searchIcon {
+    width: 13px;
+  }
+  
+  .border {
+    height: 40%;
+    width: 1.3px;
+    background-color: rgb(223, 223, 223);
+  }
+  
+  .searchIcon path {
+    fill: rgb(114, 114, 114);
+  }
+  
+  .online-circle {
+    width: 10px;
+    height: 10px;
+    background-color: #4CAF50; /* Green color, you can change this to your desired color */
+    border-radius: 50%; /* Makes it a circle */
+    display: inline-block; /* Allows it to be inline with other content */
+    margin-left: -110px;
+  }
+
+  .offline-circle {
+    width: 10px;
+    height: 10px;
+    background-color: grey; /* Green color, you can change this to your desired color */
+    border-radius: 50%; /* Makes it a circle */
+    display: inline-block; /* Allows it to be inline with other content */
+    margin-left: -110px;
+  }
+
+  .StatusOnline {
+    font-size: smaller;
+    font-weight: 800;
+    color: #4CAF50;
+    margin-left: -121px;
+    margin-top: 46px;
+    display: none;
+  }
+
+  .StatusOffline {
+    font-size: smaller;
+    font-weight: 800;
+    color:  #a6a6b7;
+    margin-left: -121px;
+    margin-top: 46px;
+    display: none;
+  }
+
   
