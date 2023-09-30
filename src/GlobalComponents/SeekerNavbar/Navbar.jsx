@@ -18,7 +18,6 @@ export default function Main(props) {
     Navigate('/')
   }
 
-  console.log(props.id);
   return (
     <>
       <div className={styles.DashboardNav}>

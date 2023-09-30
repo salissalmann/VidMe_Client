@@ -5,6 +5,7 @@ import ErrorIcon from '@mui/icons-material/Error';
 import {notification } from 'antd'
 import {CreateAccount} from './API.js'
 import { useNavigate } from 'react-router-dom';
+const emailjs = require('emailjs-com');
 
 export default function Homepage() {
     const [firstName, setFirstName] = useState('');
@@ -24,6 +25,12 @@ export default function Homepage() {
     const handlePasswordChange = (e) => { setPassword(e.target.value); };
     const handleConfirmPasswordChange = (e) => { setConfirmPassword(e.target.value); };
     const handlePhoneChange = (e) => { setPhone(e.target.value); };
+
+    function generateRandomCode() {
+        const min = 100000;
+        const max = 999999;
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
 
     const handleCreateAccount = () => {
         if (password !== confirmPassword) {
@@ -49,7 +56,7 @@ export default function Homepage() {
                     description: data.Message,
                     icon: <DoneAllIcon style={{ color: '#108ee9' }} />,
                 });
-                Navigate('/login')
+                Navigate("/verification", { state: { Email: email, Name: firstName + lastName} });
             }
             else
             {

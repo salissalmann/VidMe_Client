@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import "./Form.css";
+import "./Message.css";
 import InfiniteScroll from "react-infinite-scroll-component";
 import NavigationBar from '../../GlobalComponents/SeekerNavbar/Navbar';
 import Spinner from "../Spinner/Spinner";
@@ -23,6 +23,80 @@ export default function Form(props) {
   const [Reciever, setReciever] = useState('');
   const messageRef = useRef(null);
   const [OnlineUser, setOnlineUser] = useState([]);
+  const [IdOpen, setIdOpen] = useState(1);
+  const [lastMessages, setLastMessages] = useState({});
+  const [loadingMessages, setLoadingMessages] = useState({});
+  const [searchQuery, setSearchQuery] = useState(''); // State for search query
+  const [filteredUsers, setFilteredUsers] = useState(Info); // State for filtered users
+  const [searchQueryEnd, setSearchQueryEnd] = useState(''); // State for search query in "End" div
+  const [filteredMessages, setFilteredMessages] = useState(Messages); // State for filtered messages
+  const [typingTimeout, setTypingTimeout] = useState(null); // State to track typing delay
+
+  useEffect(() => {
+    if (typingTimeout) {
+      clearTimeout(typingTimeout);
+    }
+
+    const timeoutId = setTimeout(() => {
+      if (searchQueryEnd.trim() === '') {
+      } else {
+        const filtered = Messages.filter((message) => {
+          const text = message.text.toLowerCase();
+          return text.includes(searchQueryEnd.toLowerCase());
+        });
+        setFilteredMessages(filtered);
+      }
+    }, 500);
+
+
+    setTypingTimeout(timeoutId);
+
+    return () => {
+      if (typingTimeout) {
+        clearTimeout(typingTimeout);
+      }
+    };
+  }, [searchQueryEnd, Messages]);
+
+  useEffect(() => {
+    if (searchQuery.trim() === '') {
+      setFilteredUsers(Info);
+    } else {
+      const filtered = Info.filter((person) => {
+        const fullName = `${person.user.FirstName}`.toLowerCase();
+        return fullName.includes(searchQuery.toLowerCase());
+      });
+      setFilteredUsers(filtered);
+    }
+  }, [searchQuery, Info]);
+
+  useEffect(() => {
+    Info.forEach(async (person) => {
+      const userId = person.user._id;
+
+      try {
+        setLoadingMessages((prevLoadingMessages) => ({
+          ...prevLoadingMessages,
+          [userId]: true,
+        }));
+
+        const lastMessage = await displayLastMessage(person._id);
+        const shortenedMessage = lastMessage.length > 15 ? lastMessage.slice(0, 15) + '...' : lastMessage;
+
+        setLastMessages((prevLastMessages) => ({
+          ...prevLastMessages,
+          [userId]: shortenedMessage,
+        }));
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setLoadingMessages((prevLoadingMessages) => ({
+          ...prevLoadingMessages,
+          [userId]: false,
+        }));
+      }
+    });
+  }, [Messages, Info]);
 
   useEffect(() => {
     const socket = io('http://localhost:5050');
@@ -124,12 +198,17 @@ export default function Form(props) {
     document.getElementById('InputOuter').style.border = 'none';
     document.getElementById('TopImg').src = Info.user.img;
     document.getElementById('TopName').style.display = 'flex';
-    document.getElementById('Online').style.display = 'flex';
-    document.getElementById('Offline').style.display = 'flex';
     document.getElementById('TopName').innerHTML = Info.user.FirstName + ' ' + Info.user.LastName;
     document.getElementById('TopMessage').style.display = 'none';
     document.getElementById('Message').style.borderRight = 'none';
+    document.getElementById('StatusCheck').style.display = 'flex';
+    document.getElementById('OpenMore').style.setProperty('display', 'flex', 'important');
+    setIdOpen(Info.user._id);
   };
+
+  const FindUser = () => {
+    return OnlineUser.find(user => user.userId === IdOpen);
+  }
 
   const SendMsg = async () => {
     if (Text !== '') {
@@ -189,7 +268,39 @@ export default function Form(props) {
     }, 2000);
   }, [Check]);
 
-  let matchedUser = false;
+  const RetreiveLastMsg = async (Id) => {
+    const formData = {
+      MessageId: Id,
+    }
+    const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/conversation/FindConversation`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData),
+    });
+    const jsonData = await response.json();
+    const IdRet = await jsonData[0].content[jsonData[0].content.length - 1].SenderId;
+    if (IdRet === IdGlobal) {
+      return 'You: ' + jsonData[0].content[jsonData[0].content.length - 1].text;
+    }
+
+    return await jsonData[0].content[jsonData[0].content.length - 1].text;
+  }
+
+  async function displayLastMessage(Id) {
+    try {
+      const lastMessage = await RetreiveLastMsg(Id); // Assuming Id is defined elsewhere
+      return lastMessage;
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const OpenOptions = () => {
+    document.getElementById('End').style.setProperty('display', 'flex', 'important');
+  }
+
 
   return (
     <>
@@ -211,7 +322,7 @@ export default function Form(props) {
           </h3>
           <div>
             <div class="InputContainer">
-              <input type="text" name="text" class="input" id="input" placeholder="Search" />
+              <input type="text" name="text" class="input" id="input" placeholder="Search" value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)} />
               <label for="input" class="labelforsearch">
                 <svg viewBox="0 0 512 512" class="searchIcon"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg>
               </label>
@@ -219,44 +330,70 @@ export default function Form(props) {
           </div>
           <div className="custom-scrollbar" id="scrollable">
             <div className="content">
-              <InfiniteScroll
-                dataLength={Info.length}
-                next={FetchMoreData}
-                hasMore={Info.length < Connection.length}
-                scrollableTarget="scrollable"
-                endMessage={<p><b>End of Connections.</b></p>}
-              >
-                <div>
-                  {
-                    Info?.map((person, index) => {
-                      matchedUser = OnlineUser.find(user => user.userId === person.user._id);
-                      return (
-                        <div key={index} style={{ width: '260px', padding: '10px', borderBottom: '3px solid', borderBottomColor: 'lightslategrey', margin: 'auto', maxWidth: '260px', background: 'white', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', marginTop: '6px', marginLeft: '17%' }} onClick={() => OpenConvo(person)}>
-                          <div style={{ display: 'inline-flex', cursor: 'pointer', minWidth: '150px', marginLeft: '-160px' }}>
-                            <img src={person.user.img} alt="Profile" className="rounded-circle" width="53" height="56" style={{ marginTop: '11px' }} />
-                            <div style={{ marginTop: '41px' }}>
-                              <h6 className='HM-h6' style={{ marginLeft: '12px', marginTop: '-23px', fontWeight: '800' }}>{person.user.FirstName}</h6>
-                            </div>
-                          </div>
-                          {matchedUser ? (<div className="online-circle"></div>) :
-                            (<div className="offline-circle"></div>)}
-                        </div>
-                      )
-                    })
-                  }
+              {filteredUsers.length === 0 ? (
+                <div style={{ textAlign: 'center', padding: '20px' }}>
+                  <p>No Results Found</p>
                 </div>
-                <div style={{ display: isLoading ? 'block' : 'none' }}><Spinner /></div>
-              </InfiniteScroll>
+              ) : (
+                <InfiniteScroll
+                  dataLength={Info.length}
+                  next={FetchMoreData}
+                  hasMore={Info.length < Connection.length}
+                  scrollableTarget="scrollable"
+
+                >
+                  <div>
+                    {
+                      filteredUsers?.map((person, index) => {
+                        const matchedUser = OnlineUser.find(user => user.userId === person.user._id);
+                        const userId = person.user._id;
+                        displayLastMessage(person._id)
+                          .then(lastMessage => {
+                          })
+                          .catch(error => {
+                            console.error(error);
+                          });
+
+                        const shortenedFirstName = person.user.FirstName.slice(0, 7);
+                        return (
+                          <div key={index} style={{ width: '260px', padding: '10px', borderBottom: '3px solid', borderBottomColor: 'lightslategrey', margin: 'auto', maxWidth: '260px', background: 'white', borderTopLeftRadius: '10px', borderTopRightRadius: '10px', marginTop: '6px', marginLeft: '17%' }} onClick={() => OpenConvo(person)}>
+                            <div style={{ display: 'inline-flex', cursor: 'pointer', minWidth: '180px', marginLeft: '-160px' }}>
+                              <img src={person.user.img} alt="Profile" className="rounded-circle" width="53" height="56" style={{ marginTop: '11px' }} />
+                              <div style={{ marginTop: '41px' }}>
+                                <h6 className='HM-h6' style={{ marginLeft: '12px', marginTop: '-23px', fontWeight: '800', fontSize: 'large', display: 'flex' }}>{shortenedFirstName.length < 7 ? shortenedFirstName : `${shortenedFirstName}..`}</h6>
+                                <h6 className='HM-h6' style={{ marginLeft: '12px', marginTop: '-8px', fontWeight: '400', fontSize: 'small', color: '#999999', display: 'flex' }}>{loadingMessages[userId] ? 'Loading...' : lastMessages[userId]}</h6>
+                              </div>
+                            </div>
+                            {matchedUser ? (<div className="online-circle"></div>) :
+                              (<div className="offline-circle"></div>)}
+                          </div>
+                        )
+                      })
+                    }
+                  </div>
+                  <div style={{ display: isLoading ? 'block' : 'none' }}><Spinner /></div>
+                </InfiniteScroll>
+              )}
             </div>
           </div>
         </div>
 
         <div className="Centre">
           <div style={{ minWidth: '100%', height: '80px', display: 'flex', border: '2px solid lightgray' }}>
-            <img src={props.Img} alt="Profile" className="rounded-circle" width="53" height="56" style={{ marginLeft: '7px', marginTop: '15px', border: '1px solid black', display: 'none' }} id="TopImg" />
-            <h5 style={{ marginLeft: '12px', marginTop: '20px', fontWeight: '700', display: 'none' }} id="TopName">Hasan</h5>
-            {matchedUser ? (<div className="StatusOnline" id="Online">User Active</div>) :
-              (<div className="StatusOffline" id="Offline">User Inactive</div>)}
+            <img src={props.Img} alt="Profile" className="rounded-circle" width="53" height="56" style={{ marginLeft: '7px', marginTop: '11px', border: '1px solid black', display: 'none' }} id="TopImg" />
+            <h5 style={{ marginLeft: '12px', marginTop: '15px', fontWeight: '700', display: 'none', minWidth: '150px' }} id="TopName">Hasan</h5>
+            <div style={{ display: 'none' }} id="StatusCheck">
+              {FindUser() ? (<div className="StatusOnline" id="Online">User Active</div>) :
+                (<div className="StatusOffline" id="Offline">User Inactive</div>)}
+            </div>
+            <div id="OpenMore" className="d-flex justify-content-end InfoMsg">
+              <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-info-circle" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#00abfb" fill="none" stroke-linecap="round" stroke-linejoin="round" onClick={OpenOptions}>
+                <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                <path d="M3 12a9 9 0 1 0 18 0a9 9 0 0 0 -18 0" />
+                <path d="M12 9h.01" />
+                <path d="M11 12h1v4h1" />
+              </svg>
+            </div>
             <h4 style={{ marginLeft: '33%', marginTop: '25px' }} id="TopMessage">Click to Open Conversation</h4>
           </div>
           <div className="Message" id="Message">
@@ -317,6 +454,45 @@ export default function Form(props) {
                 <path d="M10 14l11 -11" />
                 <path d="M21 3l-6.5 18a.55 .55 0 0 1 -1 0l-3.5 -7l-7 -3.5a.55 .55 0 0 1 0 -1l18 -6.5" />
               </svg>
+            </div>
+          </div>
+        </div>
+        <div className="End" id="End">
+          <div style={{ height: '91vh' }}>
+            <div style={{ display: 'flex' }}>
+              <h3 style={{ marginLeft: '31%', marginTop: '56px' }}>Operations</h3>
+            </div>
+            <div className="Line2"></div>
+            <div class="InputContainer2">
+              <input
+                type="text"
+                name="text"
+                class="input"
+                id="inputEnd"
+                placeholder="Search in Conversation"
+                value={searchQueryEnd}
+                onChange={(e) => setSearchQueryEnd(e.target.value)}
+              />
+              <label for="input" class="labelforsearch">
+                <svg viewBox="0 0 512 512" class="searchIcon"><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"></path></svg>
+              </label>
+            </div>
+            <div className="content">
+              {filteredMessages.length > 0 ? (
+                filteredMessages.map((message, index) => {
+                  const dateObject = new Date(message.currentDate);
+                  const messageDate = dateObject.toLocaleDateString(); 
+                  return (
+                    <div key={index}>
+                      {message.text} <span style={{marginLeft: '10px'}}><b>Date: {messageDate}</b></span>
+                    </div>
+                  );
+                })
+              ) : (
+                <div style={{ textAlign: 'center', padding: '20px', marginLeft: '14%' }}>
+                  <p>No Results Found</p>
+                </div>
+              )}
             </div>
           </div>
         </div>

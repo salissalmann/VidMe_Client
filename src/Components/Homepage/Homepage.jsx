@@ -1,20 +1,51 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './Homepage.module.css';
 import { useNavigate } from 'react-router-dom';
 import { Login } from './API'
 import ErrorIcon from '@mui/icons-material/Error';
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import { notification } from 'antd'
+import { io } from 'socket.io-client';
+import { GoogleLogin } from 'react-google-login'; 
 
 export default function Homepage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [socket, setsocket] = useState(null);
+  const [Check2, setCheck2] = useState(1);
 
   const handleEmailChange = (e) => { setEmail(e.target.value); };
   const handlePasswordChange = (e) => { setPassword(e.target.value); };
   let navigate = useNavigate();
 
+  useEffect(() => {
+    const newSocket = io('http://localhost:5050');
+    setsocket(newSocket);
+  
+    return () => {
+      newSocket.disconnect();
+    };
+  }, []);
+
+  useEffect(() => {
+    const data = sessionStorage.getItem('key');
+    if (data && socket) {
+      socket.on('getUsers', users => {
+      });
+
+      socket.emit('RemoveUser', data); 
+      sessionStorage.removeItem('key');
+    }
+  
+    
+  }, [socket]); 
+
+  const InitializeUser = (IdGlobal) => {
+    socket?.emit('addUser', IdGlobal);
+  }
+
+  const ClientId = "764460646840-47dor69kkfjj5uejtnd6pvs853vqeehl.apps.googleusercontent.com";
 
   const handleCreateAccount = () => {
     setLoading(true);
@@ -29,7 +60,7 @@ export default function Homepage() {
           const formData = {
             Email: email,
           }
-          const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/FindUserInfo`, {
+          const response = await fetch(`${process.env.REACT_APP_SERVER_URL}/api/user/FindUserInfo`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
@@ -51,6 +82,8 @@ export default function Homepage() {
             navigate('/video-recorder', { replace: true })
           }
           else if (ResponseToJson.ProfileStatus === "100%") {
+            sessionStorage.setItem('key', jsonData[0]._id);
+            InitializeUser(jsonData[0]._id);
             navigate("/dashboard", { state: { replace: true, user: jsonData[0]._id } });
           }
           notification.open({
@@ -75,6 +108,25 @@ export default function Homepage() {
         })
       });
   };
+
+  const handleKey = (e) => {
+    if (e.key === "Enter" && email !== '' && password !== '') {
+      handleCreateAccount();
+    }
+  };
+
+  function onSignIn(googleUser) {
+    var profile = googleUser.getBasicProfile();
+    console.log('ID: ' + profile.getId());
+    console.log('Name: ' + profile.getName());
+    console.log('Image URL: ' + profile.getImageUrl());
+    console.log('Email: ' + profile.getEmail());
+  }
+
+  function onFailure(res) {
+    console.log('Encountered an error: ');
+    console.log(res);
+  }
 
 
   return (
@@ -106,7 +158,7 @@ export default function Homepage() {
               </div>
 
               <div className={styles.Inputs}>
-                <input type="password" id={styles['Input-Field']} placeholder="Password" value={password} onChange={handlePasswordChange} />
+                <input type="password" id={styles['Input-Field']} placeholder="Password" value={password} onChange={handlePasswordChange} onKeyDown={handleKey} />
               </div>
 
               <div className={styles.ForgotPW}>
@@ -133,6 +185,16 @@ export default function Homepage() {
                   }>Create Account</span>
                 </p>
               </div>
+                <div id='SignInButton'>
+                  <GoogleLogin
+                    clientId={ClientId}
+                    buttonText='Login with Google'
+                    onSuccess={onSignIn}
+                    onFailure={onFailure}
+                    cookiePolicy={'single_host_origin'}
+                    isSignedIn={true}
+                  />
+                </div>
             </div>
           </div>
         </div>
